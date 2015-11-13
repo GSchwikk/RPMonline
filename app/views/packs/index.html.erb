@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Packs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @packs.each do |pack| %>
+      <tr>
+        <td><%= pack.title %></td>
+        <td><%= pack.status %></td>
+        <td><%= link_to 'Show', pack %></td>
+        <td><%= link_to 'Edit', edit_pack_path(pack) %></td>
+        <td><%= link_to 'Destroy', pack, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pack', new_pack_path %>

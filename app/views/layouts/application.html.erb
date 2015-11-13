@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RPMOnline</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "application" %>
+  <%= render 'layouts/bootstrap' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <%= render 'layouts/navbar' %>
+  <div class="container">
+
+    <% flash.each do |name, msg| %>
+      <% if msg.is_a?(String) %>
+        <div class="alert alert-<%= name == "notice" ? "success" : "danger" %> alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= yield %>
+    <br>
+    <%= render 'layouts/footer' %>
+  </div>
+</body>
+</html>

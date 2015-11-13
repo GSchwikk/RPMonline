@@ -1,0 +1,25 @@
+<%= form_for([@meeting, @pack]) do |f| %>
+  <% if @pack.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pack.errors.count, "error") %> prohibited this pack from being saved:</h2>
+
+      <ul>
+      <% @pack.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "form-control", placeholder: "Shift A Electrical Engineer"  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status %><br>
+    <%= f.text_field :status, class: "form-control", placeholder: "Ready for Review" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-default" %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @pack.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @pack.status %>
+</p>
+
+<%= link_to 'Edit', edit_meeting_pack_path(@meeting, @pack), class: "btn btn-link" %>
+<%= link_to 'Back', meeting_path(@meeting), class: "btn btn-link" %>
