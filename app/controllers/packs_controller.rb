@@ -1,7 +1,8 @@
 class PacksController < ApplicationController
-  
-  before_action :set_meeting 
+
   before_action :set_pack, only: [:show, :edit, :update, :destroy]
+  before_action :set_meeting, only: [:new, :create, :destroy]
+
 
 
   # GET /packs
@@ -13,10 +14,16 @@ class PacksController < ApplicationController
   # GET /packs/1
   # GET /packs/1.json
   def show
+    @updates = Update.where(pack_id: @pack.id).order("created_at DESC")
+    @highlights = Update.where(pack_id: @pack.id).update_type("Highlight")
+    @lowlights = Update.where(pack_id: @pack.id).update_type("Lowlight")
+    @issues = Update.where(pack_id: @pack.id).update_type("Issue")
+    @priorities = Update.where(pack_id: @pack.id).update_type("Priority")
   end
 
   # GET /packs/new
   def new
+    #@meeting = Meeting.find(params[:meeting_id])
     @pack = Pack.new
   end
 
@@ -27,12 +34,13 @@ class PacksController < ApplicationController
   # POST /packs
   # POST /packs.json
   def create
+    #@meeting = Meeting.find(params[:meeting_id])
     @pack = Pack.new(pack_params)
     @pack.meeting_id = @meeting.id
 
     respond_to do |format|
       if @pack.save
-        format.html { redirect_to @meeting, notice: 'Pack was successfully created.' }
+        format.html { redirect_to @pack, notice: 'Pack was successfully created.' }
         format.json { render :show, status: :created, location: @pack }
       else
         format.html { render :new }
@@ -58,6 +66,7 @@ class PacksController < ApplicationController
   # DELETE /packs/1
   # DELETE /packs/1.json
   def destroy
+    #@meeting = Meeting.find(params[:meeting_id]) 
     @pack.destroy
     respond_to do |format|
       format.html { redirect_to meetings_path(@meeting), notice: 'Pack was successfully destroyed.' }

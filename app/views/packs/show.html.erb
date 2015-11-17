@@ -10,5 +10,38 @@
   <%= @pack.status %>
 </p>
 
-<%= link_to 'Edit', edit_meeting_pack_path(@meeting, @pack), class: "btn btn-link" %>
-<%= link_to 'Back', meeting_path(@meeting), class: "btn btn-link" %>
+
+<%= link_to "Write Update", new_pack_update_path(@pack), class: "btn btn-default" %>
+
+<br>
+<br>
+
+<div>
+<% if @updates.blank? %>
+	<h3>No updates yet</h3>
+<% else %>
+
+	<table class="table table-hover table-condensed">
+	  <thead>
+	    <tr>
+	      <th>Text</th>
+	      <th colspan="2"></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		<% @highlights.each do |highlight| %>
+		<tr>
+			<td> <%= highlight.text %> </td>
+			<td> <%=link_to "Change", edit_pack_update_path(@pack, highlight) %> </td>
+			<td> <%=link_to "Delete", pack_update_path(@pack, highlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+		</tr>
+		<% end %>
+	  </tbody>
+	</table>
+<% end %>
+</div>
+
+
+
+<%= link_to 'Edit', edit_pack_path(@pack), class: "btn btn-link" %>
+<%= link_to 'Back', meeting_path(@pack.meeting_id), class: "btn btn-link" %>

@@ -1,0 +1,31 @@
+<%= form_for([@pack, @update]) do |f| %>
+  <% if @update.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@update.errors.count, "error") %> prohibited this pack from being saved:</h2>
+
+      <ul>
+      <% @update.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="form-group">
+    <%= f.label :Update %><br>
+    <%= f.text_field :text, class: "form-control", placeholder: "Completed all maintenance tasks"  %>
+  </div>
+  <div class"form-group">
+    <%= f.label :type %><br>
+    <%#= f.text_field :update_type, class: "form-control", placeholder: "Highlight" %>
+    <%= f.select :update_type,options_for_select(["Highlight","Lowlight","Issue","Priority"]), {}, class: "form-control" %>
+  </div>
+  <br>
+    <div class="form-group">
+    <%= f.label :date %><br>
+    <%= f.date_field :date, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-default" %>
+  </div>
+<% end %>

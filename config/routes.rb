@@ -4,6 +4,9 @@ Rails.application.routes.draw do
    resources :packs 
  end
 
+   resources :packs do  
+    resources :updates
+  end
 
   get 'pages/about'
 
