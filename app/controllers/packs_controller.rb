@@ -2,7 +2,8 @@ class PacksController < ApplicationController
 
   before_action :set_pack, only: [:show, :edit, :update, :destroy]
   before_action :set_meeting, only: [:new, :create, :destroy]
-
+  before_action :authenticate_user!
+  before_action :check_user, only: [:edit, :update, :destroy]
 
 
   # GET /packs
@@ -15,10 +16,10 @@ class PacksController < ApplicationController
   # GET /packs/1.json
   def show
     @updates = Update.where(pack_id: @pack.id).order("created_at DESC")
-    @highlights = Update.where(pack_id: @pack.id).update_type("Highlight")
-    @lowlights = Update.where(pack_id: @pack.id).update_type("Lowlight")
-    @issues = Update.where(pack_id: @pack.id).update_type("Issue")
-    @priorities = Update.where(pack_id: @pack.id).update_type("Priority")
+    @highlights = Update.where(pack_id: @pack.id).update_type("Highlight").order("date ASC")
+    @lowlights = Update.where(pack_id: @pack.id).update_type("Lowlight").order("date ASC")
+    @issues = Update.where(pack_id: @pack.id).update_type("Issue").order("date ASC")
+    @priorities = Update.where(pack_id: @pack.id).update_type("Priority").order("date ASC")
   end
 
   # GET /packs/new
@@ -84,6 +85,13 @@ class PacksController < ApplicationController
     def set_meeting
        @meeting = Meeting.find(params[:meeting_id])
     end
+
+    def check_user
+      unless current_user.admin?
+        redirect_to root_url, alert: "Sorry, only admins can do that!"
+      end
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pack_params

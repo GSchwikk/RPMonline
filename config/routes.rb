@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
  
+  devise_for :users
   resources :meetings do
    resources :packs 
  end
 
    resources :packs do  
-    resources :updates
+    resources :updates, except: [:show, :index]
   end
 
   get 'pages/about'
