@@ -53,7 +53,7 @@ class UpdatesController < ApplicationController
     respond_to do |format|
       if @update.update(params[:update].permit(:text,:update_type,:date))
         format.html { redirect_to pack_path(@pack), notice: 'Pack was successfully updated.' }
-        format.json { render :show, status: :ok, location: @update }
+        format.json { render json: @pack}
       else
         format.html { render :edit }
         format.json { render json: @update.errors, status: :unprocessable_entity }

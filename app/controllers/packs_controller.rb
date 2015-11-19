@@ -26,6 +26,7 @@ class PacksController < ApplicationController
   def new
     #@meeting = Meeting.find(params[:meeting_id])
     @pack = Pack.new
+
   end
 
   # GET /packs/1/edit
@@ -56,7 +57,7 @@ class PacksController < ApplicationController
     respond_to do |format|
       if @pack.update(pack_params)
         format.html { redirect_to @pack, notice: 'Pack was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pack }
+        format.json { render json:@pack}
       else
         format.html { render :edit }
         format.json { render json: @pack.errors, status: :unprocessable_entity }
