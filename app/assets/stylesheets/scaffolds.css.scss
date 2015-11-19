@@ -1,13 +1,13 @@
 body {
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: gill sans, helvetica, arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: gill sans, helvetica, arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
@@ -63,7 +63,11 @@ div {
     margin: -7px;
     margin-bottom: 0px;
     background-color: #c00;
-    color: #fff;
+    color: #1c243e;
+  }
+
+  h1 {
+    color: #1c243e;
   }
 
   ul li {

@@ -1,0 +1,87 @@
+div.row.rpmpack{
+  border: 1px dotted #1c243e;
+  padding: 12px;
+  margin: 12px;
+}
+
+
+.footer {
+	 clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+}
+
+div.jumbotron {
+	background-color: #ebeaff;
+	h2 {
+      color: #1c243e;
+      font-weight: bold;
+   }
+}
+
+a.btn.btn-default {
+    background-color: #2a246b;
+    background-position: 0;
+    border: 0px solid transparent;
+    border-color: #fff;
+    padding: 6px 6px;
+    margin: 6px 0px 6px 30px;
+    background-image: none;
+    color: #fff;
+    text-shadow: 0 0px 0 #000;
+    box-shadow: inset 0 0px 0 #000, -2px 2px 1px #000;
+}
+
+input.btn.btn-default {
+    background-color: #2a246b;
+    background-position: 0;
+    border: 0px solid transparent;
+    border-color: #fff;
+    padding: 6px 6px;
+    background-image: none;
+    color: #fff;
+    text-shadow: 0 0px 0 #000;
+    box-shadow: inset 0 0px 0 #000, -2px 2px 1px #000;
+}
+
+.navbar-default {
+  .container-fluid {
+    background-color: #1c243e;
+   .navbar-nav > li > a {
+   color: #ffffff;
+   margin-left: 10px;
+   font-size: 16px;
+   font-weight: bold;
+   }
+   .navbar-brand {
+        color: #fff;
+        font-size: 25px;
+        font-weight: bold;
+        font-family: gill sans, sans-serif;
+
+    }
+    .navbar-brand:hover {
+        color: #98b9ff;
+    }
+    .navbar-nav > li > a:hover{
+    color: #98b9ff;
+    }
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+
+

@@ -1,8 +1,13 @@
 <h1>Editing Pack</h1>
 
-<%= render 'form' %>
+<div class="row">
+	<div class="col-md-6">
 
+		<%= render 'form' %>
+
+	</div>
+</div>
 <%#= link_to 'Show', @pack, class: "btn btn-link" %> 
 
 
-<%= link_to 'Back', meeting_pack_path(@meeting, @pack), class: "btn btn-link" %>
+| <%= link_to 'Back', pack_path(@pack), class: "btn btn-link" %> |

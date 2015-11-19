@@ -1,127 +1,129 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @pack.title %>
-</p>
+<div class = "container-fluid">
 
-<p>
-  <strong>Status:</strong>
-  <%= @pack.status %>
-</p>
+	<h4>
+	  <strong><%= @pack.title %></strong>
+	  
+	</h4>
 
-	<%= link_to "Add Update", new_pack_update_path(@pack), class: "btn btn-default" %>
+	<h4>
+	  <strong><%= @pack.status %></strong>
+	  
+	</h4>
+
+	<div class="row">
+		<div class="col-md-6 left">
+			| <%= link_to 'Edit', edit_pack_path(@pack), class: "btn btn-link" %> |
+			<%= link_to 'Back', meeting_path(@pack.meeting_id), class: "btn btn-link" %>  |
+		</div>
+			
+
+		<div class="col-md-6 right">
+			<%= link_to "Add Update", new_pack_update_path(@pack), class: "btn btn-default" %>
+		</div>
+	</div>
+
+	<div class="row rpmpack">
+		<div class="col-md-6">
+		<% if @updates.blank? %>
+			<h3>No updates yet</h3>
+		<% else %>
+				<table class="table table-hover table-condensed">
+				  <thead>
+				    <tr>
+				      <th>HIGHLIGHTS</th>
+				      <th colspan="2"></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+					<% @highlights.each do |highlight| %>
+					<tr>
+						<td width = "80%"> <%= highlight.date %>: <%= highlight.text %> </td>
+						<% if (highlight.user == current_user) || (current_user.admin?) %>
+							<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, highlight) %> </td>
+							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, highlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+						<% end %>
+					</tr>
+					<% end %>
+				  </tbody>
+				</table>
+		</div>
 
 
-<br>
-<br>
+		<div class="col-md-6">
+			<table class="table table-hover table-condensed">
+			  <thead>
+			    <tr>
+			      <th>ISSUES</th>
+			      <th colspan="2"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				<% @issues.each do |issue| %>
+				<tr>
+					<td width = "80%"> <%= issue.date %>: <%= issue.text %> </td>
+					<% if (issue.user == current_user) || (current_user.admin?) %>
+						<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, issue) %> </td>
+						<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, issue), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+					<% end %>
+				</tr>
+				<% end %>
+			  </tbody>
+			</table>
+		</div>
 
-<div>
-<% if @updates.blank? %>
-	<h3>No updates yet</h3>
-<% else %>
+		<div class = "breaker">
+			<div class="col-md-12">
+			</div>
+		</div>
 
-<div class="col-md-6">
-	<table class="table table-hover table-condensed">
-	  <thead>
-	    <tr>
-	      <th>HIGHLIGHTS</th>
-	      <th colspan="2"></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-		<% @highlights.each do |highlight| %>
-		<tr>
-			<td width = "80%"> <%= highlight.date %>: <%= highlight.text %> </td>
-			<% if (highlight.user == current_user) || (current_user.admin?) %>
-				<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, highlight) %> </td>
-				<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, highlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-			<% end %>
-		</tr>
+		<div class="col-md-6">
+			<table class="table table-hover table-condensed">
+			  <thead>
+			    <tr>
+			      <th>LOWLIGHTS</th>
+			      <th colspan="2"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				<% @lowlights.each do |lowlight| %>
+				<tr>
+					<td width = "80%"> <%= lowlight.date %>: <%= lowlight.text %> </td>
+					<% if (lowlight.user == current_user) || (current_user.admin?) %>
+						<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, lowlight) %> </td>
+						<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, lowlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+					<% end %>
+				</tr>
+				<% end %>
+			  </tbody>
+			</table>
+		</div>
+
+		<div class="col-md-6">
+			<table class="table table-hover table-condensed">
+			  <thead>
+			    <tr>
+			      <th>PRIORITIES</th>
+			      <th colspan="2"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				<% @priorities.each do |priority| %>
+				<tr>
+					<td width = "80%"> <%= priority.date %>: <%=priority.text %> </td>
+					<% if (priority.user == current_user) || (current_user.admin?) %>
+						<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, priority) %> </td>
+						<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, priority), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+					<% end %>
+				</tr>
+				<% end %>
+			  </tbody>
+			</table>
+		</div>
+
 		<% end %>
-	  </tbody>
-	</table>
-</div>
 
-
-<div class="col-md-6">
-	<table class="table table-hover table-condensed">
-	  <thead>
-	    <tr>
-	      <th>ISSUES</th>
-	      <th colspan="2"></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-		<% @issues.each do |issue| %>
-		<tr>
-			<td width = "80%"> <%= issue.date %>: <%= issue.text %> </td>
-			<% if (issue.user == current_user) || (current_user.admin?) %>
-				<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, issue) %> </td>
-				<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, issue), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-			<% end %>
-		</tr>
-		<% end %>
-	  </tbody>
-	</table>
-</div>
-
-<div class = "breaker">
-	<div class="col-md-12">
 	</div>
 </div>
 
-<div class="col-md-6">
-	<table class="table table-hover table-condensed">
-	  <thead>
-	    <tr>
-	      <th>LOWLIGHTS</th>
-	      <th colspan="2"></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-		<% @lowlights.each do |lowlight| %>
-		<tr>
-			<td width = "80%"> <%= lowlight.date %>: <%= lowlight.text %> </td>
-			<% if (lowlight.user == current_user) || (current_user.admin?) %>
-				<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, lowlight) %> </td>
-				<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, lowlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-			<% end %>
-		</tr>
-		<% end %>
-	  </tbody>
-	</table>
-</div>
-
-<div class="col-md-6">
-	<table class="table table-hover table-condensed">
-	  <thead>
-	    <tr>
-	      <th>PRIORITIES</th>
-	      <th colspan="2"></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-		<% @priorities.each do |priority| %>
-		<tr>
-			<td width = "80%"> <%= priority.date %>: <%=priority.text %> </td>
-			<% if (priority.user == current_user) || (current_user.admin?) %>
-				<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, priority) %> </td>
-				<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, priority), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-			<% end %>
-		</tr>
-		<% end %>
-	  </tbody>
-	</table>
-</div>
-
-<% end %>
-
-
-</div>
-
-
-<div class = "footer">
-<%= link_to 'Edit', edit_pack_path(@pack), class: "btn btn-link" %>
-<%= link_to 'Back', meeting_path(@pack.meeting_id), class: "btn btn-link" %>
-</div>

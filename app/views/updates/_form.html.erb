@@ -21,11 +21,20 @@
     <%= f.select :update_type,options_for_select(["Highlight","Lowlight","Issue","Priority"]), {}, class: "form-control" %>
   </div>
   <br>
-    <div class="form-group">
-    <%= f.label :date %><br>
-    <%= f.date_field :date, class: "form-control" %>
+  <div class="form-group">
+    <%= label :date, 'Date' %>
+    <div class='input-group date' id='datetimepicker1'>
+      <%= text_field :date, nil,:value => Time.now.strftime('%Y-%m-%d'), class: 'form-control', data: { date_format: 'YYYY/MM/DD' } %>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit class: "btn btn-default" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+</script>
