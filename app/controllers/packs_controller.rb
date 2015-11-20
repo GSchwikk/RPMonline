@@ -54,6 +54,7 @@ class PacksController < ApplicationController
   # PATCH/PUT /packs/1
   # PATCH/PUT /packs/1.json
   def update
+    respond_to :json
     respond_to do |format|
       if @pack.update(pack_params)
         format.html { redirect_to @pack, notice: 'Pack was successfully updated.' }

@@ -39,7 +39,7 @@
 				  <tbody>
 					<% @highlights.each do |highlight| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (highlight.user == current_user) || (current_user.admin?), [@pack, highlight], :date, :as => :input %> : </td>
+						<td width = "20%"> <%= best_in_place_if (highlight.user == current_user) || (current_user.admin?), [@pack, highlight], :date, :type => :date, id: "date_input" %> : </td>
 						<td width = "70%"> <%= best_in_place_if (highlight.user == current_user) || (current_user.admin?), [@pack, highlight], :text, :as => :input %> </td>
 						<% if (highlight.user == current_user) || (current_user.admin?) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, highlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -61,13 +61,13 @@
 			  </thead>
 			  <tbody>
 				<% @issues.each do |issue| %>
-				<tr>
-					<td width = "80%"> <%= issue.date %>: <%= issue.text %> </td>
-					<% if (issue.user == current_user) || (current_user.admin?) %>
-						<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, issue) %> </td>
-						<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, issue), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-					<% end %>
-				</tr>
+					<tr>
+						<td width = "20%"> <%= best_in_place_if (issue.user == current_user) || (current_user.admin?), [@pack, issue], :date, :type => :date, id: "date_input" %> : </td>
+						<td width = "70%"> <%= best_in_place_if (issue.user == current_user) || (current_user.admin?), [@pack, issue], :text, :as => :input %> </td>
+						<% if (issue.user == current_user) || (current_user.admin?) %>
+							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, issue), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+						<% end %>
+					</tr>
 				<% end %>
 			  </tbody>
 			</table>
@@ -88,13 +88,13 @@
 			  </thead>
 			  <tbody>
 				<% @lowlights.each do |lowlight| %>
-				<tr>
-					<td width = "80%"> <%= lowlight.date %>: <%= lowlight.text %> </td>
-					<% if (lowlight.user == current_user) || (current_user.admin?) %>
-						<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, lowlight) %> </td>
-						<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, lowlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-					<% end %>
-				</tr>
+					<tr>
+						<td width = "20%"> <%= best_in_place_if (lowlight.user == current_user) || (current_user.admin?), [@pack, lowlight], :date, :type => :date, id: "date_input" %> : </td>
+						<td width = "70%"> <%= best_in_place_if (lowlight.user == current_user) || (current_user.admin?), [@pack, lowlight], :text, :as => :input %> </td>
+						<% if (lowlight.user == current_user) || (current_user.admin?) %>
+							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, lowlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+						<% end %>
+					</tr>
 				<% end %>
 			  </tbody>
 			</table>
@@ -110,13 +110,13 @@
 			  </thead>
 			  <tbody>
 				<% @priorities.each do |priority| %>
-				<tr>
-					<td width = "80%"> <%= priority.date %>: <%=priority.text %> </td>
-					<% if (priority.user == current_user) || (current_user.admin?) %>
-						<td width = "10%"> <%=link_to "Change", edit_pack_update_path(@pack, priority) %> </td>
-						<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, priority), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-					<% end %>
-				</tr>
+					<tr>
+						<td width = "20%"> <%= best_in_place_if (priority.user == current_user) || (current_user.admin?), [@pack, priority], :date, :type => :date, id: "date_input" %> : </td>
+						<td width = "70%"> <%= best_in_place_if (priority.user == current_user) || (current_user.admin?), [@pack, priority], :text, :as => :input %> </td>
+						<% if (priority.user == current_user) || (current_user.admin?) %>
+							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, priority), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+						<% end %>
+					</tr>
 				<% end %>
 			  </tbody>
 			</table>

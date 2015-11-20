@@ -15,12 +15,22 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require best_in_place
+//= require jquery-ui/datepicker
+//= require best_in_place.jquery-ui
+
 
 $(document).ready(function() {
   /* Activating Best In Place */
   jQuery(".best_in_place").best_in_place();
 });
 
+jQuery(function($){
+    $.datepicker();
+});
+
+
 $(function () {
     $('#datetimepicker1').datetimepicker();
 });
+
+
