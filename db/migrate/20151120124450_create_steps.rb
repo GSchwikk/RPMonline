@@ -1,6 +1,6 @@
 class CreateSteps < ActiveRecord::Migration
   def change
-    create_table :actions do |t|
+    create_table :steps do |t|
       t.text :description
       t.date :due_date
       t.string :status
