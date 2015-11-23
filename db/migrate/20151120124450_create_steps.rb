@@ -1,4 +1,4 @@
-class CreateActions < ActiveRecord::Migration
+class CreateSteps < ActiveRecord::Migration
   def change
     create_table :actions do |t|
       t.text :description
