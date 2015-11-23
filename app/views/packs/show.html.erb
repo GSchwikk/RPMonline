@@ -16,10 +16,14 @@
 		<div class="col-md-6 left">
 			| <%= link_to 'Edit', edit_pack_path(@pack), class: "btn btn-link" %> |
 			<%= link_to 'Back', meeting_path(@pack.meeting_id), class: "btn btn-link" %>  |
+			<br>
+			<h3> Summary <h3>
 		</div>
 			
 
 		<div class="col-md-6 right">
+			<br>
+			<br>
 			<%= link_to "Add Update", new_pack_update_path(@pack), class: "btn btn-default" %>
 		</div>
 	</div>
@@ -125,5 +129,50 @@
 		<% end %>
 
 	</div>
+
+		<div class = "row">
+			<div class="col-md-12">
+			</div>
+		</div>
+
+
+	<div class="row">
+		<div class="col-md-6 left">
+		<h3> Actions <h3>
+		</div>
+		<div class="col-md-6 right">
+			<%= link_to "Add Action", new_pack_step_path(@pack), class: "btn btn-default" %>
+		</div>
+	</div>
+
+	
+	<div class="row rpmpack">
+		<div class="col-md-12">
+			<table class="table table-hover table-condensed">
+			  <thead>
+			    <tr>
+			      <th>Action</th>
+			      <th>Due Date</th>
+			      <th>Status</th>
+			      <th colspan="1"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				<% @actions.each do |action| %>
+					<tr>
+						<td width = "50%"> <%= best_in_place_if (action.user == current_user) || (current_user.admin?), [@pack, action], :description, :as => :input %> </td>
+						<td width = "20%"> <%= best_in_place_if (action.user == current_user) || (current_user.admin?), [@pack, action], :due_date, :type => :date, id: "date_input" %> </td>
+						<td width = "20%"> <%= best_in_place_if (action.user == current_user) || (current_user.admin?), [@pack, action], :status, :as => :select, :collection => @status_values,:value => action.status %> </td>
+						<% if (action.user == current_user) || (current_user.admin?) %>
+							<td width = "10%"> <%=link_to "Delete", pack_step_path(@pack, action), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+						<% end %>
+					</tr>
+				<% end %>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+
+
 </div>
 

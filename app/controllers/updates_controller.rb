@@ -2,7 +2,14 @@ class UpdatesController < ApplicationController
   
   before_action :set_pack
   before_action :set_update, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :check_user, only: [:edit, :update, :destroy]
 
+  def check_user
+    unless @update.user == current_user || (current_user.admin?)
+      redirect_to root_url, alert: "Sorry, this pack belongs to someone else"
+    end
+  end
 
  
   def index
@@ -24,6 +31,7 @@ class UpdatesController < ApplicationController
 
   def create
     @update = Update.new(update_params)
+    @update.user_id = current_user.id
     @update.pack_id = @pack.id
 
     case @update.update_type 
@@ -53,10 +61,10 @@ class UpdatesController < ApplicationController
     respond_to do |format|
       if @update.update(params[:update].permit(:text,:update_type,:date))
         format.html { redirect_to pack_path(@pack), notice: 'Pack was successfully updated.' }
-        format.json { render json: @pack}
+        format.json { respond_with_bip(@update)}
       else
         format.html { render :edit }
-        format.json { render json: @update.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@update) }
       end
     end
   end

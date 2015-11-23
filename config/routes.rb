@@ -7,6 +7,7 @@ Rails.application.routes.draw do
  end
 
    resources :packs do  
+    resources :steps, except: [:show, :index]
     resources :updates, except: [:show, :index]
   end
 

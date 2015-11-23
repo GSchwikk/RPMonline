@@ -16,10 +16,12 @@ class PacksController < ApplicationController
   # GET /packs/1.json
   def show
     @updates = Update.where(pack_id: @pack.id).order("created_at DESC")
+    @actions = Step.where(pack_id: @pack.id).order("due_date ASC")
     @highlights = Update.where(pack_id: @pack.id).update_type("Highlight").order("date ASC")
     @lowlights = Update.where(pack_id: @pack.id).update_type("Lowlight").order("date ASC")
     @issues = Update.where(pack_id: @pack.id).update_type("Issue").order("date ASC")
     @priorities = Update.where(pack_id: @pack.id).update_type("Priority").order("date ASC")
+    @status_values = {"Not yet due" => "Not yet due", "Done" => "Done", "Not Done" => "Not Done"}
   end
 
   # GET /packs/new

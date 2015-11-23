@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
  	has_many :updates, dependent: :destroy
+ 	has_many :steps, dependent: :destroy
 
 	validates :first_name, :last_name, presence: true
 end

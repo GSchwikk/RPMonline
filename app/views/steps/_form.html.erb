@@ -1,0 +1,33 @@
+<%= form_for ([@pack, @step]) do |f| %>
+  <% if @step.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@step.errors.count, "error") %> prohibited this pack from being saved:</h2>
+
+      <ul>
+      <% @step.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="form-group">
+    <%= f.label :Action %><br>
+    <%= f.text_field :description, class: "form-control", placeholder: "Complete E03 inspections"  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Date %>
+    <div id='datepicker'>
+      <%= f.date_field :due_date, :value => Time.now.strftime('%d-%m-%Y'), class: 'form-control' %>
+    </div>
+  </div>
+    <div class"form-group">
+    <%= f.label :Status %><br>
+    <%= f.select :status, options_for_select(["Not yet due","Done","Not Done"]), {}, class: "form-control" %>
+  </div>
+    <br>
+  <div class="actions">
+    <%= f.submit class: "btn btn-default" %>
+  </div>
+<% end %>
+
