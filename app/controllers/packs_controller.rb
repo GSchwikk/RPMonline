@@ -15,6 +15,7 @@ class PacksController < ApplicationController
   # GET /packs/1
   # GET /packs/1.json
   def show
+
     @updates = Update.where(pack_id: @pack.id).order("created_at DESC")
     @actions = Step.where(pack_id: @pack.id).order("due_date ASC")
     @highlights = Update.where(pack_id: @pack.id).update_type("Highlight").order("date ASC")
@@ -22,6 +23,7 @@ class PacksController < ApplicationController
     @issues = Update.where(pack_id: @pack.id).update_type("Issue").order("date ASC")
     @priorities = Update.where(pack_id: @pack.id).update_type("Priority").order("date ASC")
     @status_values = {"Not yet due" => "Not yet due", "Done" => "Done", "Not Done" => "Not Done"}
+    @packstatus_values = {"Ready" => "Ready", "Not Ready" => "Not Ready"}
   end
 
   # GET /packs/new
@@ -56,14 +58,13 @@ class PacksController < ApplicationController
   # PATCH/PUT /packs/1
   # PATCH/PUT /packs/1.json
   def update
-    respond_to :json
     respond_to do |format|
       if @pack.update(pack_params)
         format.html { redirect_to @pack, notice: 'Pack was successfully updated.' }
-        format.json { render json:@pack}
+        format.json { respond_with_bip(@pack) }
       else
         format.html { render :edit }
-        format.json { render json: @pack.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@pack) }
       end
     end
   end

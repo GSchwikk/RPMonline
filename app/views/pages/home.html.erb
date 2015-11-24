@@ -1,0 +1,29 @@
+<div class ="jumbotron">
+  <div class="container">
+    <h2> RPMOnline lets you set up Review and Progress Meetings</h2>
+    <h3> Setup your own organisation, meetings, and KPIs </h3>
+  </div>
+</div>
+
+
+<h1>Welcome to RPMOnline</h1>
+<br>
+<p>This is a demo application for Review and Progress Meetings (RPM) oneline, a platform for setting up and running RPMs with your team</p>
+<br>
+
+<% if user_signed_in? %>
+    
+    <%= link_to meetings_path, class: "btn btn-default", data: { no_turbolink: true} do %><i class="glyphicon glyphicon-list-alt"></i> See RPMs
+    <% end %>
+
+<% else %>
+          
+    <%= link_to new_user_session_path, class: "btn btn-default", data: { no_turbolink: true} do %><i class="glyphicon glyphicon-log-in"></i> Sign In
+    <% end %>
+
+    <%= link_to new_user_registration_path, class: "btn btn-default", data: { no_turbolink: true} do %><i class="glyphicon glyphicon-user"></i> Sign Up
+    <% end %>
+          
+
+<% end %>
+
