@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
  
   devise_for :users
+  resources :users, :only => [:show]
+  #match 'users/:id' => 'users#show', via: :get
   
   resources :meetings do
    resources :packs 

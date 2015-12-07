@@ -1,15 +1,9 @@
 class UpdatesController < ApplicationController
-  
   before_action :set_pack
   before_action :set_update, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
-  before_action :check_user, only: [:edit, :update, :destroy]
-
-  def check_user
-    unless @update.user == current_user || (current_user.admin?)
-      redirect_to root_url, alert: "Sorry, this pack belongs to someone else"
-    end
-  end
+  load_and_authorize_resource :pack
+  load_and_authorize_resource :update, :through => :pack, param_method: :update_params
+  #before_filter :authorize_meeting
 
  
   def index
@@ -87,6 +81,17 @@ class UpdatesController < ApplicationController
 
     def set_pack
       @pack = Pack.find(params[:pack_id])
+      @meeting = Meeting.where(meeting_id: @pack.meeting_id)
+    end
+
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to @pack, :alert => exception.message
+    end
+
+    def authorize_meeting
+      if current_user.role == 'meeting_owner'
+        authorize! :manage, (@meeting)
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

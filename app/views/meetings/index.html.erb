@@ -25,7 +25,7 @@
 
 <br>
 
-<% if user_signed_in? && current_user.admin? %>
+<% if current_user.role === 'org-admin' || current_user.admin? %>
   <%= link_to new_meeting_path, class: "btn btn-default", data: { no_turbolink: true} do %>
     <i class="glyphicon glyphicon-plus"></i> New RPM
   <% end %>

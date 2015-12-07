@@ -1,9 +1,12 @@
-class PacksController < ApplicationController
-
+class PacksController < ApplicationController 
   before_action :set_pack, only: [:show, :edit, :update, :destroy]
-  before_action :set_meeting, only: [:new, :create, :destroy]
-  before_action :authenticate_user!
-  before_action :check_user, only: [:edit, :update, :destroy]
+  before_action :set_meeting, only: [:new, :create, :destroy]  
+  load_and_authorize_resource param_method: :pack_params
+  #load_and_authorize_resource :meeting
+  load_and_authorize_resource :pack, :through => :meeting, param_method: :meeting_params
+  #efore_filter :authorize_meeting
+  #before_action :authenticate_user!
+  #before_action :check_user, only: [:edit, :update, :destroy]
 
 
   # GET /packs
@@ -43,6 +46,7 @@ class PacksController < ApplicationController
     #@meeting = Meeting.find(params[:meeting_id])
     @pack = Pack.new(pack_params)
     @pack.meeting_id = @meeting.id
+    @pack.user_id = current_user.id
 
     respond_to do |format|
       if @pack.save
@@ -91,10 +95,15 @@ class PacksController < ApplicationController
        @meeting = Meeting.find(params[:meeting_id])
     end
 
-    def check_user
-      unless current_user.admin?
-        redirect_to root_url, alert: "Sorry, only admins can do that!"
-      end
+    #def check_user
+    #  unless current_user.admin?
+    #    redirect_to root_url, alert: "Sorry, only admins can do that!"
+    #  end
+    #end
+
+
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to current_user, :alert => exception.message
     end
 
 

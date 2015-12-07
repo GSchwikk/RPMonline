@@ -32,6 +32,11 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :Role %>
+    <%= f.collection_select :role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize},{prompt: "Select a role"}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
     <%= f.submit "Sign up", class: "btn btn-default" %>
   </div>
 <% end %>

@@ -1,0 +1,60 @@
+<h2> <%= @user.first_name %> <%= @user.last_name %></h2>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <h3> Available Packs: </h3>
+    <div class="col-md-9">
+      <% if @packs.blank? %>
+      	<h4>No packs yet, see meeting owner or admin to create pack</h4>
+      <% else %>
+      <table class="table table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+      	<% @packs.each do |pack| %>
+      	<tr>
+      		<td> <%= link_to pack.title, pack_path(pack), class: "btn btn-link" %> </td>
+      		<td> <%= pack.status %> </td>
+      	</tr>
+      	<% end %>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <h3> Assigned Actions: </h3>
+    <div class="col-md-9">
+      <% if @actions.blank? %>
+        <h4>No actions yet, go to pack to add actions</h4>
+      <% else %>
+      <table class="table table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Due Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @actions.each do |action| %>
+        <tr>
+          <td> <%= action.description %> </td>
+          <td> <%= action.due_date %> </td>
+          <td> <%= action.status %> </td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>
