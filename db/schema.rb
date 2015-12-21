@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125143012) do
+ActiveRecord::Schema.define(version: 20151209065429) do
 
   create_table "Steps", force: :cascade do |t|
     t.text     "description"
@@ -26,12 +26,28 @@ ActiveRecord::Schema.define(version: 20151125143012) do
   add_index "Steps", ["pack_id"], name: "index_actions_on_pack_id"
   add_index "Steps", ["user_id"], name: "index_actions_on_user_id"
 
+  create_table "divisions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+    t.integer  "organisation_id"
+  end
+
   create_table "meetings", force: :cascade do |t|
     t.string   "name"
-    t.string   "division"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "division_id"
+  end
+
+  create_table "organisations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "industry"
+    t.string   "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
   end
 
   create_table "packs", force: :cascade do |t|
@@ -75,6 +91,7 @@ ActiveRecord::Schema.define(version: 20151125143012) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "role",                   default: "pack_owner"
+    t.integer  "organisation_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

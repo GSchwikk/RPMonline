@@ -1,12 +1,20 @@
 Rails.application.routes.draw do
- 
+
   devise_for :users
   resources :users, :only => [:show]
   #match 'users/:id' => 'users#show', via: :get
+
+  resources :organisations do
+    resources :divisions, except: [ :index] 
+  end
+  
+  resources :divisions do
+    resources :meetings, except: [ :index] 
+  end
   
   resources :meetings do
    resources :packs 
- end
+  end
 
    resources :packs do  
     resources :steps, except: [:show, :index]

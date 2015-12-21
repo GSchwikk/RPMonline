@@ -17,8 +17,8 @@
     <%= f.text_field :name, class: "form-control", placeholder: "Shift A Plant Maintenance" %>
   </div>
   <div class="form-group">
-    <%= f.label :division %><br>
-    <%= f.text_field :division, class: "form-control", placeholder: "Operations" %>
+    <%= f.label :division_id %><br>
+    <%= f.collection_select :division_id, Division.where(organisation_id: current_user.organisation_id), :id, :name, {prompt: "Choose a division"}, {class: "btn btn-default dropdown-toggle"} %>
   </div>
   <div class="actions">
     <%= f.submit class: "btn btn-default" %>

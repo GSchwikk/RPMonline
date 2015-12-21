@@ -7,11 +7,12 @@ class User < ActiveRecord::Base
  	has_many :updates, dependent: :destroy
  	has_many :steps, dependent: :destroy
   has_many :meetings
-
+  has_many :divisions
+  belongs_to :organisation
 
 	validates :first_name, :last_name, presence: true
 
-	ROLES = %i[org_admin div_owner meeting_owner pack_owner]
+	ROLES = %i[org_owner div_owner meeting_owner pack_owner]
 
   def has_role?(role)
     roles.include?(role.to_s)

@@ -3,6 +3,7 @@ class UpdatesController < ApplicationController
   before_action :set_update, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource :pack
   load_and_authorize_resource :update, :through => :pack, param_method: :update_params
+  load_and_authorize_resource :update, :through => :meeting, param_method: :meeting_params
   #before_filter :authorize_meeting
 
  
@@ -25,7 +26,7 @@ class UpdatesController < ApplicationController
 
   def create
     @update = Update.new(update_params)
-    @update.user_id = current_user.id
+    @update.user_id = @pack.user_id
     @update.pack_id = @pack.id
 
     case @update.update_type 

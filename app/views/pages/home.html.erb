@@ -13,7 +13,7 @@
 
 <% if user_signed_in? %>
     
-    <%= link_to meetings_path, class: "btn btn-default", data: { no_turbolink: true} do %><i class="glyphicon glyphicon-list-alt"></i> See RPMs
+    <%= link_to current_user, class: "btn btn-default", data: { no_turbolink: true} do %><i class="glyphicon glyphicon-list-alt"></i> See Dashboard
     <% end %>
 
 <% else %>

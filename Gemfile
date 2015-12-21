@@ -19,6 +19,10 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem 'best_in_place', github: 'bernat/best_in_place'
 gem 'jquery-ui-rails'
 gem 'cancancan', '~> 1.10'
+gem 'fog', require: 'fog/aws'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem "mini_magick"
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

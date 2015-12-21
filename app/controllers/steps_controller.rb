@@ -1,16 +1,19 @@
 class StepsController < ApplicationController
-  load_and_authorize_resource :pack
-  load_and_authorize_resource :step, :through => :pack, param_method: :step_params
   before_action :set_pack
   before_action :set_step, only: [:show, :edit, :update, :destroy]
-  before_filter :authorize_meeting
+  load_and_authorize_resource :pack
+  load_and_authorize_resource :step, :through => :pack, param_method: :step_params
+  load_and_authorize_resource :update, :through => :meeting, param_method: :meeting_params
+
+  #before_filter :authorize_meeting
 
 
-  def check_user
-    unless @step.user == current_user || (current_user.admin?)
-      redirect_to root_url, alert: "Sorry, this pack belongs to someone else"
-    end
-  end
+
+  # def check_user
+  #   unless @step.user == current_user || (current_user.admin?)
+  #     redirect_to root_url, alert: "Sorry, this pack belongs to someone else"
+  #   end
+  # end
  
   def index
     @steps = Step.all
@@ -31,7 +34,7 @@ class StepsController < ApplicationController
 
   def create
     @step = Step.new(step_params)
-    @step.user_id = current_user.id
+    @step.user_id = @pack.user_id
     @step.pack_id = @pack.id    
     respond_to do |format|
       if @step.save

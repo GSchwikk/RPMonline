@@ -1,0 +1,30 @@
+<%= form_for(@organisation, :html => {multipart: true}) do |f| %>
+  <% if @organisation.errors.any? %>
+       <div id="error_explanation" class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h2><%= pluralize(@organisation.errors.count, "error") %> prohibited this organisation from being saved:</h2>
+
+      <ul>
+      <% @organisation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :industry %><br>
+    <%= f.text_field :industry,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :logo %><br>
+    <%= f.file_field :image, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-default" %>
+  </div>
+<% end %>

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@meetings = Meeting.where(user_id: @user.id)
 		@packs = Pack.where(user_id: @user.id)
 		@actions = Step.where(user_id: @user.id)
 	end

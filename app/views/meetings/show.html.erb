@@ -4,18 +4,18 @@
   <div class="row">
     <div class="col-md-3">
 
-      <p> [holder for company logo] </p>
+      <%= image_tag current_user.organisation.image.logo.url %>
 
       <p>
         <strong><%= @meeting.name %></strong>
       </p>
 
       <p>
-        <strong><%= @meeting.division %></strong>
+        <strong><%= @meeting.division.name %></strong>
       </p>
 
       <div>
-      <% if user_signed_in? %>
+      <% if can? :manage, @meeting %>
         <%= link_to new_meeting_pack_path(@meeting), class: "btn btn-default", data: { no_turbolink: true} do %>
           <i class="glyphicon glyphicon-plus"></i> New Pack
         <% end %>
@@ -24,7 +24,9 @@
 
       <div>
         | <%= link_to 'Edit', edit_meeting_path(@meeting), class: "btn btn-link" %> |
-        <%= link_to 'Back', meetings_path, class: "btn btn-link" %> |
+        <% if can? :manage, @division %>
+          <%= link_to 'Back', division_path(@meeting.division_id), class: "btn btn-link" %> |
+        <% end %>
       </div>
 
     </div>

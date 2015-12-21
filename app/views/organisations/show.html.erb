@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+
+      <h2>
+        <%= @organisation.name %>
+      </h2>
+
+      <p>
+        <%= image_tag @organisation.image.logo.url %>
+      </p>
+
+      <% if current_user.role === 'org_owner' || current_user.admin? %>
+        <%= link_to new_division_path, class: "btn btn-default", data: { no_turbolink: true} do %>
+          <i class="glyphicon glyphicon-plus"></i> New Division
+        <% end %>
+      <% end %>
+
+      <br>
+
+      <% if current_user.role === 'org_owner' || current_user.admin? %>
+      	<%= link_to 'Edit', edit_organisation_path(@organisation) %> 
+      <% end %>
+
+    </div>
+    <div class="col-md-9">
+      <h3>Divisions:</h3>
+
+      <table class="table table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Owner</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @divisions.each do |division| %>
+            <tr>
+              <td><%= link_to division.name, division , class: "btn btn-link" %></td>
+              <td><%= current_user.first_name %> <%= current_user.last_name %></td>
+              <td><%= link_to 'Edit', edit_division_path(division) %></td>
+              <td><%= link_to 'Destroy', division, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+  </div>
+</div>

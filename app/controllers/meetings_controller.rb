@@ -1,34 +1,25 @@
 class MeetingsController < ApplicationController
   load_and_authorize_resource param_method: :meeting_params
+  load_and_authorize_resource :meeting, :through => :division, param_method: :division_params
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :set_division, only: [:new, :destroy] 
+  before_action :check_org
 
-
-
-  # GET /meetings
-  # GET /meetings.json
-  def index
-    @meetings = Meeting.all
-  end
-
-  # GET /meetings/1
-  # GET /meetings/1.json
   def show
     @packs = Pack.where(meeting_id: @meeting.id)
   end
 
-  # GET /meetings/new
   def new
     @meeting = Meeting.new
   end
 
-  # GET /meetings/1/edit
   def edit
   end
 
-  # POST /meetings
-  # POST /meetings.json
   def create
     @meeting = Meeting.new(meeting_params)
+    #@meeting.division_id = @division.id
+    @meeting.user_id = current_user.id
 
     respond_to do |format|
       if @meeting.save
@@ -60,7 +51,7 @@ class MeetingsController < ApplicationController
   def destroy
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to meetings_url, notice: 'Meeting was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Meeting was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,11 +62,22 @@ class MeetingsController < ApplicationController
       @meeting = Meeting.find(params[:id])
     end
 
+    def set_division
+       @division = Division.find(params[:division_id])
+    end
+
+
     #def check_user
     #  unless current_user.admin?
     #    redirect_to root_url, alert: "Sorry, only admins can do that!"
     #  end
     #end
+
+    def check_org
+      unless current_user.organisation == @meeting.division.organisation
+        redirect_to current_user, :alert => "Sorry, you are not authorised for that"
+      end
+    end
 
     rescue_from CanCan::AccessDenied do |exception|
       redirect_to current_user, :alert => exception.message
@@ -83,6 +85,6 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:name, :division)
+      params.require(:meeting).permit(:name, :division_id)
     end
 end

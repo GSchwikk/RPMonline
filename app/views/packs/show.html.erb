@@ -2,6 +2,8 @@
 
 <div class = "container-fluid">
 
+	<%= image_tag current_user.organisation.image.logo.url %>
+
 	<h4>
 	  <strong><%= @pack.title %></strong>
 	  
@@ -15,7 +17,7 @@
 	<div class="row">
 		<div class="col-md-6 left">
 			| <%= link_to 'Edit', edit_pack_path(@pack), class: "btn btn-link" %> |
-			<% if can? :manage, @meeting %>
+			<% if current_user.role = "org_owner" || current_user.role = "meeting_owner"|| current_user.role = "div_owner"%>
 				<%= link_to 'Back', meeting_path(@pack.meeting_id), class: "btn btn-link" %>  |
 			<% end %>
 			<br>
