@@ -1,0 +1,41 @@
+<h2> <%= current_user.first_name %> <%= current_user.last_name %></h2>
+
+
+<% if current_user.organisation.blank? %>
+
+  <h2> No Organisation Loaded yet </h2>
+
+<% elsif current_user.admin || current_user.role = "org_owner" || current_user.role = "div_owner" %>
+
+  <h2> <%= link_to current_user.organisation.name, organisation_path(current_user.organisation) %> </h2>
+
+<% else %>
+
+  <h2> <%= current_user.organisation.name %> </h2>
+
+<% end %>
+
+
+<div class="container-fluid">
+	<div class="row user-list">
+		<h3>User List:</h3>
+		<div class="col-md-9">
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>User Name</th>
+						<th>Role</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @users.each do |u| %>
+						<tr>
+							<td><%=u.first_name%> <%=u.last_name%></td>
+							<td> <%= best_in_place u, :role, :as => :select, :collection => @roles, :value => u.role %> </td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

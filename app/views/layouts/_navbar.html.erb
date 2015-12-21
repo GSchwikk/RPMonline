@@ -20,7 +20,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <% if current_user.role == "org_owner" %>
-            <li><%= link_to "Administration", current_user %></li>
+            <li><%= link_to "Administration", users_path %></li>
           <% end %>
           <li><%= link_to "Dashboard", current_user %> </li>
           <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
