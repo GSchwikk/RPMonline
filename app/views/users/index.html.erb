@@ -17,14 +17,14 @@
 
 
 <div class="container-fluid">
-	<div class="row user-list">
+	<div class="row box-list">
 		<h3>User List:</h3>
 		<div class="col-md-9">
 			<table class="table table-hover table-condensed">
 				<thead>
 					<tr>
 						<th>User Name</th>
-						<th>Role</th>
+						<th>Role (Click to Change)</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,6 +32,60 @@
 						<tr>
 							<td><%=u.first_name%> <%=u.last_name%></td>
 							<td> <%= best_in_place u, :role, :as => :select, :collection => @roles, :value => u.role %> </td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row box-list">
+		<h3>Ownership List:</h3>
+		<div class="col-md-12">
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th width = "40%">Division, Meetings and Packs</th>
+						<th width = "40%">Assigned User (Click to Change)</th>
+						<th width = "10%">Edit Name</th>
+						<th width = "10%">Delete Item</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @divisions.each do |d| %>
+						<tr>
+							<td> <strong>Division: </strong> <%= d.name %></td>
+							<% if @div_collection.blank? %>
+								<td> No division owners set, change a user role to 'Division Owner' and refresh the page</td>
+							<% else %>
+								<td> <%= best_in_place d, :user_id, :as => :select, :collection => @div_collection %></td>
+							 <% end %>
+		 			      		<td> <%=link_to "Edit", edit_division_path(d) %> </td>
+								<td> <%=link_to "Delete", division_path(d), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+
+							 <% d.meetings.each do |m| %>
+							 	<tr>
+							 		<td class="table-indent"><strong>Meeting: </strong><%= m.name %> </td>
+ 									<% if @meeting_collection.blank? %>
+										<td> No meeting or division owners set, change a user role to 'Meeting Owner' and refresh the page</td>
+									<% else %>
+							 			<td> <%= best_in_place m, :user_id, :as => :select, :collection => @meeting_collection %></td>
+							 		<% end %>
+				 			      		<td> <%=link_to "Edit", edit_meeting_path(m) %> </td>
+      									<td> <%=link_to "Delete", meeting_path(m), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+							 	</tr>
+
+ 								 <% m.packs.each do |p| %>
+							 	<tr>
+							 		<td class="table-indent-double"><strong>Pack: </strong><%= p.title %> </td>
+							 			<td> <%= best_in_place p, :user_id, :as => :select, :collection => @user_collection %></td>
+				 			      		<td> <%=link_to "Edit", edit_pack_path(p) %> </td>
+      									<td> <%=link_to "Delete", pack_path(p), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+							 		<% end %>
+							 	</tr>
+							 <% end %>
 						</tr>
 					<% end %>
 				</tbody>

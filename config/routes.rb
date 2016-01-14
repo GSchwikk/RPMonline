@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :users, :only => [:show, :index]
+  resources :users, :only => [:show, :index, :update]
   #match 'users/:id' => 'users#show', via: :get
 
   resources :organisations do

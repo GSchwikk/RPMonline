@@ -48,7 +48,7 @@ class DivisionsController < ApplicationController
     respond_to do |format|
       if @division.update(division_params)
         format.html { redirect_to @division, notice: 'Division was successfully updated.' }
-        format.json { render :show, status: :ok, location: @division }
+        format.json { respond_with_bip(@division) }
       else
         format.html { render :edit }
         format.json { render json: @division.errors, status: :unprocessable_entity }
@@ -82,6 +82,6 @@ class DivisionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def division_params
-      params.require(:division).permit(:name)
+      params.require(:division).permit(:name, :user_id)
     end
 end
