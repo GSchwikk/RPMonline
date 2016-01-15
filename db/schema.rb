@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209065429) do
+ActiveRecord::Schema.define(version: 20160115062504) do
 
   create_table "Steps", force: :cascade do |t|
     t.text     "description"
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 20151209065429) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "pack_id"
-    t.integer  "user_id"
   end
 
   add_index "updates", ["pack_id"], name: "index_updates_on_pack_id"

@@ -2,7 +2,7 @@ class MeetingsController < ApplicationController
   load_and_authorize_resource param_method: :meeting_params
   load_and_authorize_resource :meeting, :through => :division, param_method: :division_params
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
-  before_action :set_division, only: [:new, :destroy] 
+  before_action :set_division, only: [:new] 
   before_action :check_org
 
   def show

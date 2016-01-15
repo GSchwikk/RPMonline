@@ -4,6 +4,6 @@ class Meeting < ActiveRecord::Base
 	belongs_to :division
 	belongs_to :user
 	belongs_to :organisation
-	has_many :packs
+	has_many :packs, dependent: :destroy
 
 end

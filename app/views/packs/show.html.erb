@@ -49,7 +49,7 @@
 				  <tbody>
 					<% @highlights.each do |highlight| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :date, :type => :date, id: "date_input" %> : </td>
+						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :date, :as => :date, id: "date_input" %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, highlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -72,7 +72,7 @@
 			  <tbody>
 				<% @issues.each do |issue| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, issue], :date, :type => :date, id: "date_input" %> : </td>
+						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, issue], :date, :as => :date, id: "date_input" %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, issue], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, issue), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -99,7 +99,7 @@
 			  <tbody>
 				<% @lowlights.each do |lowlight| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, lowlight], :date, :type => :date, id: "date_input" %> : </td>
+						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, lowlight], :date, :as => :date, id: "date_input" %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, lowlight], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, lowlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -121,7 +121,7 @@
 			  <tbody>
 				<% @priorities.each do |priority| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, priority], :date, :type => :date, id: "date_input" %> : </td>
+						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, priority], :date, :as => :date, id: "date_input" %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, priority], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, priority), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -169,7 +169,7 @@
 				<% @actions.each do |action| %>
 					<tr>
 						<td width = "50%"> <%= best_in_place_if (can? :manage, @pack), [@pack, action], :description, :as => :input %> </td>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, action], :due_date, :type => :date, id: "date_input" %> </td>
+						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, action], :due_date, :as => :date, id: "date_input" %> </td>
 						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, action], :status, :as => :select, :collection => @status_values,:value => action.status %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_step_path(@pack, action), method: :delete, data: { confirm: 'Are you sure?' } %> </td>

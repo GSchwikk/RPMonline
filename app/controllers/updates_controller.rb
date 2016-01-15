@@ -26,7 +26,6 @@ class UpdatesController < ApplicationController
 
   def create
     @update = Update.new(update_params)
-    @update.user_id = @pack.user_id
     @update.pack_id = @pack.id
 
     case @update.update_type 
@@ -98,7 +97,7 @@ class UpdatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def update_params
       #params.permit(:text, :update_type, :date)
-      params.require(:update).permit(:text, :update_type, :date)
+      params.require(:update).permit(:text, :update_type, :date, :pack_id)
     end
 
 
