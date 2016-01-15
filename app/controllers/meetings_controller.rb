@@ -74,7 +74,7 @@ class MeetingsController < ApplicationController
     #end
 
     def check_org
-      unless current_user.organisation == @meeting.division.organisation
+      unless current_user.organisation == @division.organisation
         redirect_to current_user, :alert => "Sorry, you are not authorised for that"
       end
     end
