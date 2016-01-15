@@ -3,7 +3,7 @@ class MeetingsController < ApplicationController
   load_and_authorize_resource :meeting, :through => :division, param_method: :division_params
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
   before_action :set_division, only: [:new] 
-  before_action :check_org
+  before_action :check_org, only: [:new] 
 
   def show
     @packs = Pack.where(meeting_id: @meeting.id)
