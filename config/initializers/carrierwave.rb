@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  unless ENV['AWS_ACCESS_KEY_ID'].blank?
+  #unless ENV['AWS_ACCESS_KEY_ID'].blank?
 	  config.fog_provider = 'fog/aws'
 	  config.fog_credentials = {
 	    :provider               => 'AWS',                        # required
@@ -8,5 +8,5 @@ CarrierWave.configure do |config|
 	    :region 				=> 'us-east-1'                        # required
 	  }
 	  config.fog_directory  = ENV["fog_directory"]                    # required
-	end
+	#end
 end
