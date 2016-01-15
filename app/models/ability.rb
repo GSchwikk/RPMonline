@@ -5,11 +5,6 @@ class Ability
     # Define abilities for the passed in user here. 
     alias_action :update, :destroy, :to => :modify
 
-    if user.admin?
-      can :manage, :all
-    else
-      #can :read, :all
-    end
 
     if user.role == "pack_owner"
         can :manage, Pack, user_id: user.id
@@ -44,6 +39,10 @@ class Ability
         can :manage, Update
         can :manage, Step
         cannot [:destroy,:create], Organisation
+    end
+
+    if user.admin?
+      can :manage, :all
     end
 
   end
