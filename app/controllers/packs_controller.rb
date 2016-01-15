@@ -1,7 +1,7 @@
 class PacksController < ApplicationController 
   before_action :set_pack, only: [:show, :edit, :update, :destroy]
   before_action :set_meeting, only: [:new, :create, :delete] 
-  before_action :check_org 
+  before_action :check_org, only: [:new] 
 
   load_resource :pack
   before_filter :authorize
@@ -109,7 +109,7 @@ class PacksController < ApplicationController
     #end
 
     def check_org
-      unless current_user.organisation == @pack.meeting.division.organisation
+      unless current_user.organisation == @meeting.division.organisation
         redirect_to current_user, :alert => "Sorry, you are not authorised for that"
       end
     end
