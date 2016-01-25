@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     resources :updates, except: [:show, :index]
   end
 
+  resources :kpis
+
   get 'pages/about'
 
   get 'pages/contact'

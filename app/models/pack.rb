@@ -7,4 +7,6 @@ class Pack < ActiveRecord::Base
 	has_many :updates, dependent: :destroy
  	has_many :steps, dependent: :destroy
 
+ 	has_and_belongs_to_many :kpis
+
 end

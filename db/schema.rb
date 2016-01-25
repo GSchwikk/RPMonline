@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115062504) do
+ActiveRecord::Schema.define(version: 20160125115630) do
 
   create_table "Steps", force: :cascade do |t|
     t.text     "description"
@@ -33,6 +33,33 @@ ActiveRecord::Schema.define(version: 20160115062504) do
     t.integer  "user_id"
     t.integer  "organisation_id"
   end
+
+  create_table "kpi_datapoints", force: :cascade do |t|
+    t.integer  "kpi_id"
+    t.date     "date"
+    t.decimal  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "kpi_datapoints", ["kpi_id"], name: "index_kpi_datapoints_on_kpi_id"
+
+  create_table "kpis", force: :cascade do |t|
+    t.string   "name"
+    t.string   "vector"
+    t.string   "units"
+    t.string   "frequency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "kpis_packs", id: false, force: :cascade do |t|
+    t.integer "kpi_id"
+    t.integer "pack_id"
+  end
+
+  add_index "kpis_packs", ["kpi_id"], name: "index_kpis_packs_on_kpi_id"
+  add_index "kpis_packs", ["pack_id"], name: "index_kpis_packs_on_pack_id"
 
   create_table "meetings", force: :cascade do |t|
     t.string   "name"
