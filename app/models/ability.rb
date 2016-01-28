@@ -11,6 +11,7 @@ class Ability
         can :manage, Update, :pack => { :user_id => user.id }
         can :manage, Step, :pack => { :user_id => user.id }
         cannot :manage, Meeting
+        cannot :manage, Kpi
     end
 
     if user.role == "meeting_owner"
@@ -20,6 +21,7 @@ class Ability
         can :manage, Update
         can :manage, Step
         cannot :manage, Division
+        cannot :manage, Kpi
     end
 
     if user.role == "div_owner"
@@ -29,6 +31,7 @@ class Ability
         can :manage, Pack 
         can :manage, Update
         can :manage, Step
+        cannot :manage, Kpi
     end
 
     if user.role == "org_owner"
