@@ -1,13 +1,12 @@
 class KpisController < ApplicationController
-	before_action :check_org, only: [:new] 
-	load_and_authorize_resource 
-	before_filter :authorize
+	before_action :set_organisation, only: [:new, :create, :destroy, :index]  
+	load_and_authorize_resource param_method: :kpi_params 
+	#before_filter :authorize
 	before_action :check_user, only: [:index, :create, :new, :edit, :update, :destroy]
 
 	def index
-	@kpis = Kpi.all
+		@kpis = Kpi.where(organisation_id: @organisation.id)
 	end
-
 
 	def new
 		@kpi = Kpi.new
@@ -15,6 +14,7 @@ class KpisController < ApplicationController
 
 	def create
 		@kpi = Kpi.new(kpi_params)
+		@kpi.organisation_id = @organisation.id
 
 		respond_to do |format|
 	      if @kpi.save
@@ -31,23 +31,23 @@ class KpisController < ApplicationController
 	end
 
 	def update
-	@kpi = Kpi.find( params[:kpi_id] )
+		@kpi = Kpi.find( params[:kpi_id] )
 
-	respond_to do |format|
-	  if @kpi.update(kpi_params)
-	    format.html { redirect_to @kpi, notice: 'KPI was successfully updated.' }
-	    format.json { respond_with_bip(@kpi) }
-	  else
-	    format.html { render :edit }
-	    format.json { respond_with_bip(@kpi) }
-	  end
-	end
+		respond_to do |format|
+		  if @kpi.update(kpi_params)
+		    format.html { redirect_to @kpi, notice: 'KPI was successfully updated.' }
+		    format.json { respond_with_bip(@kpi) }
+		  else
+		    format.html { render :edit }
+		    format.json { respond_with_bip(@kpi) }
+		  end
+		end
 	end
 
 	def destroy
-	@kpi = Kpi.find( params[:kpi_id] )
+		@kpi = Kpi.find( params[:kpi_id] )
 
-	@kpi.destroy
+		@kpi.destroy
 		respond_to do |format|
 		  format.html { redirect_to :back, notice: 'KPI was successfully destroyed.' }
 		  format.json { head :no_content }
@@ -60,10 +60,8 @@ class KpisController < ApplicationController
       params.require(:kpi).permit(:name, :vector, :units, :frequency)
     end
 
-    def check_org
-      unless current_user.organisation == @meeting.division.organisation
-        redirect_to current_user, :alert => "Sorry, you are not authorised for that"
-      end
+    def set_organisation
+      @organisation = current_user.organisation
     end
 
     def check_user

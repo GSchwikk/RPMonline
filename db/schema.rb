@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125115630) do
+ActiveRecord::Schema.define(version: 20160129152852) do
 
   create_table "Steps", force: :cascade do |t|
     t.text     "description"
@@ -49,8 +49,9 @@ ActiveRecord::Schema.define(version: 20160125115630) do
     t.string   "vector"
     t.string   "units"
     t.string   "frequency"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "organisation_id"
   end
 
   create_table "kpis_packs", id: false, force: :cascade do |t|

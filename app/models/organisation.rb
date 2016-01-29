@@ -4,5 +4,6 @@ class Organisation < ActiveRecord::Base
 
 	has_many :users
 	has_many :divisions, dependent: :destroy
+	has_many :kpis
 
 end

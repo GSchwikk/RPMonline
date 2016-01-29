@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     resources :divisions, except: [ :index] 
   end
   
+  resources :organisations do
+      resources :kpis
+  end
+
   resources :divisions do
     resources :meetings, except: [ :index] 
   end
@@ -20,8 +24,6 @@ Rails.application.routes.draw do
     resources :steps, except: [:show, :index]
     resources :updates, except: [:show, :index]
   end
-
-  resources :kpis
 
   get 'pages/about'
 
