@@ -3,8 +3,9 @@
 <h1>Listing all Key Performance Indicators</h1>
 
 <br>
-
-<%= link_to 'New KPI', new_organisation_kpi_path, class: "btn btn-default" %>
+<% if not(params[:pack]) %>
+  <%= link_to 'New KPI', new_organisation_kpi_path, class: "btn btn-default" %>
+<% end %>
 
 <br>
 <br>
@@ -16,7 +17,7 @@
       <th>Vector</th>
       <th>Units</th>
       <th>Frequency</th>
-      <th colspan="4"></th>
+      <th colspan="5"></th>
     </tr>
   </thead>
 
@@ -28,9 +29,11 @@
         <td><%= kpi.units %></td>
         <td><%= kpi.frequency %></td>
         <% if params[:pack] %>
-        <!-- remove if KPI already has been added -->
-        <td><%= link_to 'Add to Pack', updatepack_organisation_kpi_path(@organisation, kpi, pack: @pack.id), method: :put %></td>
-        <!-- remove if KPI already has been added -->
+          <% if @pack.kpis.include?(kpi) %>
+            <td>Added</td>
+          <% else %>
+            <td><%= link_to 'Add to Pack', updatepack_organisation_kpi_path(@organisation, kpi, pack: @pack.id), method: :put %></td>
+          <% end %>
         <% end %>
         <td><%= link_to 'Show', organisation_kpi_path(@organisation, kpi) %></td>
         <td><%= link_to 'Edit', edit_organisation_kpi_path(@organisation, kpi) %></td>

@@ -33,6 +33,7 @@ class PacksController < ApplicationController
     @priorities = Update.where(pack_id: @pack.id).update_type("Priority").order("date ASC")
     @status_values = {"Not yet due" => "Not yet due", "Done" => "Done", "Not Done" => "Not Done"}
     @packstatus_values = {"Ready" => "Ready", "Not Ready" => "Not Ready"}
+    @kpis = Kpi.all
   end
 
   # GET /packs/new
