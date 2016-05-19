@@ -16,7 +16,7 @@
       <th>Vector</th>
       <th>Units</th>
       <th>Frequency</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -27,6 +27,11 @@
         <td><%= kpi.vector %></td>
         <td><%= kpi.units %></td>
         <td><%= kpi.frequency %></td>
+        <% if params[:pack] %>
+        <!-- remove if KPI already has been added -->
+        <td><%= link_to 'Add to Pack', updatepack_organisation_kpi_path(@organisation, kpi, pack: @pack.id), method: :put %></td>
+        <!-- remove if KPI already has been added -->
+        <% end %>
         <td><%= link_to 'Show', organisation_kpi_path(@organisation, kpi) %></td>
         <td><%= link_to 'Edit', edit_organisation_kpi_path(@organisation, kpi) %></td>
         <td><%= link_to 'Destroy', organisation_kpi_path(@organisation, kpi), method: :delete, data: { confirm: 'Are you sure?' } %></td>

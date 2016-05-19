@@ -125,6 +125,6 @@ class PacksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pack_params
-      params.require(:pack).permit(:title, :status, :meeting_id, :user_id)
+      params.require(:pack).permit(:title, :status, :meeting_id, :user_id, :kpi_ids => [])
     end
 end

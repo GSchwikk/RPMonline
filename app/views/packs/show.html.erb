@@ -181,6 +181,45 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-6 left">
+			<h3> KPIs <h3>
+		</div>
+		<div class="col-md-6 right">
+	        <%= link_to organisation_kpis_path(@pack.meeting.division.organisation, pack: @pack.id), class: "btn btn-default", data: { no_turbolink: true} do %>
+	          <i class="glyphicon glyphicon-plus"></i> Add KPI
+	        <% end %>
+		</div>
+	</div>
+
+	<div class="row rpmpack">
+		<div class="col-md-12">
+			<% if @pack.kpis %>
+			<h4> No KPIs added to this pack yet </h4>
+			<% else %>
+				<table class="table table-hover table-condensed">
+				  <thead>
+				    <tr>
+				      <th>KPI Name</th>
+				      <th>Units</th>
+				      <th>Vector</th>
+				      <th>Frequency</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+					<% @pack.kpis.each do |kpi| %>
+						<tr>
+							<td> <%= kpi.name %></td>
+							<td> <%= kpi.units %></td>
+							<td> <%= kpi.vector %></td>
+							<td> <%= kpi.frequency %></td>						
+						</tr>
+					<% end %>
+				  </tbody>
+				</table>
+			<% end %>
+		</div>
+	</div>
 
 </div>
 

@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   end
   
   resources :organisations do
-      resources :kpis
+      resources :kpis do
+        member do
+          put :updatepack
+        end
+      end
   end
 
   resources :divisions do

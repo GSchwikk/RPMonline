@@ -1,11 +1,16 @@
 class KpisController < ApplicationController
-	before_action :set_organisation, only: [:new, :create, :destroy, :index]  
+	before_action :set_organisation, only: [:new, :edit, :create, :destroy, :index]  
 	load_and_authorize_resource param_method: :kpi_params 
 	#before_filter :authorize
 	before_action :check_user, only: [:index, :create, :new, :edit, :update, :destroy]
 
 	def index
 		@kpis = Kpi.where(organisation_id: @organisation.id)
+		
+		if params[:pack]
+			@packs = Pack.all
+			@pack = Pack.find( params[:pack]) 
+		end
 	end
 
 	def new
@@ -18,7 +23,7 @@ class KpisController < ApplicationController
 
 		respond_to do |format|
 	      if @kpi.save
-	        format.html { redirect_to @kpi, notice: 'KPI was successfully created.' }
+	        format.html { redirect_to @kpis, notice: 'KPI was successfully created.' }
 	        format.json { render :show, status: :created, location: @kpi }
 	      else
 	        format.html { render :new }
@@ -28,11 +33,35 @@ class KpisController < ApplicationController
 	end
 
 	def edit
+		
+	end
+
+	def updatepack
+		@kpi = Kpi.find( params[:id] )
+
+		@pack = Pack.find( params[:pack])
+		@pack_ids = @kpi.pack_ids
+		@pack_ids << @pack.id
+
+
+        if @kpi.update_attributes(:pack_ids => @pack_ids)
+            redirect_to @pack, :notice => "KPI was successfully added"
+        else
+            render "index"
+        end 
+
+		# if @kpi.update(kpi_params)
+		#     format.html { redirect_to @pack, notice: 'KPI was successfully added.' }
+		#     format.json { respond_with_bip(@kpi) }
+		#   else
+		#     format.html { render :edit }
+		#     format.json { respond_with_bip(@kpi) }
+		#  end
+
 	end
 
 	def update
-		@kpi = Kpi.find( params[:kpi_id] )
-
+		@kpi = Kpi.find( params[:id] )
 		respond_to do |format|
 		  if @kpi.update(kpi_params)
 		    format.html { redirect_to @kpi, notice: 'KPI was successfully updated.' }
@@ -45,7 +74,7 @@ class KpisController < ApplicationController
 	end
 
 	def destroy
-		@kpi = Kpi.find( params[:kpi_id] )
+		@kpi = Kpi.find( params[:id] )
 
 		@kpi.destroy
 		respond_to do |format|
@@ -57,7 +86,7 @@ class KpisController < ApplicationController
 	private
 
     def kpi_params
-      params.require(:kpi).permit(:name, :vector, :units, :frequency)
+      params.require(:kpi).permit(:name, :vector, :units, :frequency,:organisation_id, :pack_ids => [])
     end
 
     def set_organisation
