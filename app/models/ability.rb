@@ -31,7 +31,8 @@ class Ability
         can :manage, Pack 
         can :manage, Update
         can :manage, Step
-        cannot :manage, Kpi
+        can [:index, :updatepack, :edit], Kpi
+        cannot [:destroy, :create], Kpi
     end
 
     if user.role == "org_owner"
@@ -41,6 +42,7 @@ class Ability
         can :manage, Pack
         can :manage, Update
         can :manage, Step
+        can :manage, Kpi
         cannot [:destroy,:create], Organisation
     end
 

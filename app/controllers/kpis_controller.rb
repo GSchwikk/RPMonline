@@ -1,8 +1,8 @@
 class KpisController < ApplicationController
-	before_action :set_organisation, only: [:new, :edit, :create, :destroy, :index]  
+	before_action :set_organisation, only: [:new, :edit, :create, :destroy, :index, :updatepack]  
 	load_and_authorize_resource param_method: :kpi_params 
 	#before_filter :authorize
-	before_action :check_user, only: [:index, :create, :new, :edit, :update, :destroy]
+	#before_action :check_user, only: [:index, :create, :new, :edit, :update, :destroy]
 
 	def index
 		@kpis = Kpi.where(organisation_id: @organisation.id)
@@ -41,22 +41,26 @@ class KpisController < ApplicationController
 
 		@pack = Pack.find( params[:pack])
 		@pack_ids = @kpi.pack_ids
-		@pack_ids << @pack.id
+		
+		#if change = 1, then remove the pack id from the kpi
+		if params[:change] == "1"
+			@pack_ids.delete_if {|a| a == @pack.id} 
 
+	        if @kpi.update_attributes(:pack_ids => @pack_ids)
+	            redirect_to organisation_kpis_path(@organisation, pack: @pack.id), :notice => "KPI was successfully removed"
+	        else
+	            render "index"
+	        end 			
+		else
+			#if change = 2, then add the pack id from the kpi
+			@pack_ids << @pack.id
 
-        if @kpi.update_attributes(:pack_ids => @pack_ids)
-            redirect_to @pack, :notice => "KPI was successfully added"
-        else
-            render "index"
-        end 
-
-		# if @kpi.update(kpi_params)
-		#     format.html { redirect_to @pack, notice: 'KPI was successfully added.' }
-		#     format.json { respond_with_bip(@kpi) }
-		#   else
-		#     format.html { render :edit }
-		#     format.json { respond_with_bip(@kpi) }
-		#  end
+	        if @kpi.update_attributes(:pack_ids => @pack_ids)
+	            redirect_to organisation_kpis_path(@organisation, pack: @pack.id), :notice => "KPI was successfully added"
+	        else
+	            render "index"
+	        end 
+	    end
 
 	end
 
@@ -93,11 +97,11 @@ class KpisController < ApplicationController
       @organisation = current_user.organisation
     end
 
-    def check_user
-     unless current_user.admin?
-       redirect_to root_url, alert: "Sorry, only super admins can do that!"
-     end
-    end
+    # def check_user
+    #  unless current_user.admin?
+    #    redirect_to root_url, alert: "Sorry, only super admins can do that!"
+    #  end
+    # end
 
     rescue_from CanCan::AccessDenied do |exception|
       redirect_to current_user, :alert => exception.message
