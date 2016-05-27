@@ -14,20 +14,38 @@
   <%= link_to "Excel", "#" %>
 </p>
 
+<%= form_tag updatevalues_organisation_kpis_path(@organisation), method: :get do %>
+  	Select Start Date <%= date_select('event','date') %>
+	<%= submit_tag "Change" %>
+<% end %>
+
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
-      <th width ="10%">Name</th>
-      <th width ="10%">Units</th>
-      <th colspan="4"></th>
+      <th width ="20%"></th>
+      <th width ="20%"></th>
+      <th>Week 1</th>
+      <th>Week 2</th>
+      <th>Week 3</th>
+      <th>Week 4</th>
     </tr>
+  </thead>
+
+  <thead>
+      <th width ="20%">Name</th>
+      <th width ="20%">Units</th>
+      <th><%= @week1.strftime('%d/%m/%Y') %></th>
+      <th><%= @week2.strftime('%d/%m/%Y') %></th>
+      <th><%= @week3.strftime('%d/%m/%Y') %></th>
+      <th><%= @week4.strftime('%d/%m/%Y') %></th>
+
   </thead>
 
   <tbody>
     <% @kpis.each do |kpi| %>
       <tr>
-        <td width ="10%"><%= kpi.name %></td>
-        <td width ="10%"><%= kpi.units %></td>
+        <td width ="20%"><%= kpi.name %></td>
+        <td width ="20%"><%= kpi.units %></td>
         
         <td></td>
         <td></td>

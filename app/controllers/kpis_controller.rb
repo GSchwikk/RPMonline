@@ -66,6 +66,23 @@ class KpisController < ApplicationController
 
 	def updatevalues
 		@kpis = Kpi.where(organisation_id: @organisation.id)
+
+		if params[:event]
+			date = Date.new(*params["event"].values.map(&:to_i))
+			#period = params[:start_date]
+			#date = Date.new period[year].to_i, period[month].to_i, period[day].to_i
+			@week1 = date.beginning_of_week
+			@week2 = (date.beginning_of_week) -7
+			@week3 = (date.beginning_of_week) - 14
+			@week4 = (date.beginning_of_week) - 21
+
+		else
+			@week1 = 1.week.ago.beginning_of_week
+			@week2 = 2.week.ago.beginning_of_week
+			@week3 = 3.week.ago.beginning_of_week
+			@week4 = 4.week.ago.beginning_of_week
+	    end
+
 	end
 
 	def update
