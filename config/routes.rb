@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   resources :organisations do
       resources :kpis do
+        collection { get :updatevalues }
         member do
           put :updatepack
         end

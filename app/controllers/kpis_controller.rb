@@ -1,5 +1,5 @@
 class KpisController < ApplicationController
-	before_action :set_organisation, only: [:new, :edit, :create, :destroy, :index, :updatepack]  
+	before_action :set_organisation, only: [:new, :edit, :create, :destroy, :index, :updatepack, :updatevalues]  
 	load_and_authorize_resource param_method: :kpi_params 
 	#before_filter :authorize
 	#before_action :check_user, only: [:index, :create, :new, :edit, :update, :destroy]
@@ -62,6 +62,10 @@ class KpisController < ApplicationController
 	        end 
 	    end
 
+	end
+
+	def updatevalues
+		@kpis = Kpi.where(organisation_id: @organisation.id)
 	end
 
 	def update

@@ -1,6 +1,6 @@
 class OrganisationsController < ApplicationController
   load_and_authorize_resource 
-  before_action :set_organisation, only: [:show, :edit, :update, :destroy]
+  before_action :set_organisation, only: [:show, :edit, :update, :destroy,:updatevalues]
   before_action :check_user, only: [:index, :create, :new, :destroy]
 
   # GET /organisations
@@ -8,6 +8,7 @@ class OrganisationsController < ApplicationController
   def index
     @organisations = Organisation.all
   end
+
 
   # GET /organisations/1
   # GET /organisations/1.json
