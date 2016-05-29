@@ -65,6 +65,7 @@ class KpisController < ApplicationController
 	end
 
 	def updatevalues
+		#@kpis = Kpi.where(organisation_id: @organisation.id)
 		@kpis = Kpi.where(organisation_id: @organisation.id)
 
 		if params[:event]
@@ -82,6 +83,8 @@ class KpisController < ApplicationController
 			@week3 = 3.week.ago.beginning_of_week
 			@week4 = 4.week.ago.beginning_of_week
 	    end
+
+
 
 	end
 

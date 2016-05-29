@@ -45,12 +45,32 @@
     <% @kpis.each do |kpi| %>
       <tr>
         <td width ="20%"><%= kpi.name %></td>
-        <td width ="20%"><%= kpi.units %></td>
-        
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td width ="20%"><%= kpi.units %></td>    
+
+        <% if kpi.kpi_datapoints.wkvalue(@week1).first %>
+          <td> <%= kpi.kpi_datapoints.wkvalue(@week1).first.value %></td>
+        <% else %>
+          <td> </td>
+        <% end %>
+
+        <% if kpi.kpi_datapoints.wkvalue(@week2).first %>
+          <td> <%= kpi.kpi_datapoints.wkvalue(@week2).first.value %></td>
+        <% else %>
+          <td> </td>
+        <% end %>
+
+        <% if kpi.kpi_datapoints.wkvalue(@week3).first %>
+          <td> <%= kpi.kpi_datapoints.wkvalue(@week3).first.value %></td>
+        <% else %>
+          <td> </td>
+        <% end %>
+
+        <% if kpi.kpi_datapoints.wkvalue(@week4).first %>
+          <td> <%= kpi.kpi_datapoints.wkvalue(@week4).first.value %></td>
+        <% else %>
+          <td> </td>
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>

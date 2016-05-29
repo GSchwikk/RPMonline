@@ -1,12 +1,20 @@
-class Kpi_datapoints < ActiveRecord::Base
+class KpiDatapoint < ActiveRecord::Base
   
   belongs_to :kpi
 
   validates :date, :value, presence: true
 
-  # def self.4wkvalues
-  # 	where("date > ?", 4.week.ago)
+  scope :wkvalue, -> (start) {where date: start if start.present?} 
+
+
+  # def self.wkvalue(startdate)
+  #  	find("date = ?", startdate)
   # end
+
+  # def self.1wkvalue(startdate,kpi_id)
+  #  	find("date = ?" and "kpi_id = ?", startdate, kpi_id)
+  # end
+
 
   # kpi.kpi_datapoints.4wkvalues.average(:values).round(2)
 
