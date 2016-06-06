@@ -47,26 +47,28 @@
         <td width ="20%"><%= kpi.name %></td>
         <td width ="20%"><%= kpi.units %></td>    
 
-        <% if kpi.kpi_datapoints.wkvalue(@week1).first %>
-          <td> <%= kpi.kpi_datapoints.wkvalue(@week1).first.value %></td>
+        <% if kpi.kpi_datapoints.get_wkvalue(@week1).first %>
+          <td> <%= kpi.kpi_datapoints.get_wkvalue(@week1).first.value %></td>
         <% else %>
           <td> </td>
         <% end %>
 
-        <% if kpi.kpi_datapoints.wkvalue(@week2).first %>
-          <td> <%= kpi.kpi_datapoints.wkvalue(@week2).first.value %></td>
+        <% if kpi.kpi_datapoints.get_wkvalue(@week2).first %>
+          <td> <%= kpi.kpi_datapoints.get_wkvalue(@week2).first.value %></td>
         <% else %>
           <td> </td>
         <% end %>
 
-        <% if kpi.kpi_datapoints.wkvalue(@week3).first %>
-          <td> <%= kpi.kpi_datapoints.wkvalue(@week3).first.value %></td>
+        <% if kpi.kpi_datapoints.get_wkvalue(@week3).first %>
+          <td> <%= kpi.kpi_datapoints.get_wkvalue(@week3).first.value %></td>
         <% else %>
           <td> </td>
         <% end %>
 
-        <% if kpi.kpi_datapoints.wkvalue(@week4).first %>
-          <td> <%= kpi.kpi_datapoints.wkvalue(@week4).first.value %></td>
+        <% if kpi.kpi_datapoints.get_wkvalue(@week4).first %>
+          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week4).first %>
+              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week4) %>
+          </td>
         <% else %>
           <td> </td>
         <% end %>

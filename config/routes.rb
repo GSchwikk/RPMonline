@@ -17,6 +17,12 @@ Rails.application.routes.draw do
       end
   end
 
+  resources :kpi_datapoints,:only => :none do
+    member do
+      put :updatevalue
+    end
+  end
+
   resources :divisions do
     resources :meetings, except: [ :index] 
   end

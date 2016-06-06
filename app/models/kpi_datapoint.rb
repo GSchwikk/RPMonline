@@ -1,10 +1,19 @@
 class KpiDatapoint < ActiveRecord::Base
   
+
+
   belongs_to :kpi
 
   validates :date, :value, presence: true
 
-  scope :wkvalue, -> (start) {where date: start if start.present?} 
+  scope :get_wkvalue, -> (start) {where date: start if start.present?} 
+
+  #set method
+
+  # def set_wkvalue(val,start)
+  #   point = KpiDatapoint.where(date: start)
+  #   point.value = val
+  # end
 
 
   # def self.wkvalue(startdate)
