@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       end
   end
 
-  resources :kpi_datapoints,:only => :none do
+  resources :kpi_datapoints,:only => [:create] do
     member do
       put :updatevalue
     end

@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/bernat/best_in_place.git
-  revision: f6f108ecaba04d9990ceea03df00ca6006bb9b0f
-  specs:
-    best_in_place (3.0.3)
-      actionpack (>= 3.2)
-      railties (>= 3.2)
-
-GIT
   remote: git://github.com/carrierwaveuploader/carrierwave.git
   revision: e3acabb512cb55b683b6d74a63db0723f06df091
   specs:
@@ -15,6 +7,14 @@ GIT
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+
+GIT
+  remote: git://github.com/sbeam/best_in_place.git
+  revision: 2927b1ab1efe604a58f2b472d278a15c5a9279e7
+  specs:
+    best_in_place (3.1.0)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
 
 GEM
   remote: https://rubygems.org/

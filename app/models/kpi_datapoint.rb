@@ -4,9 +4,10 @@ class KpiDatapoint < ActiveRecord::Base
 
   belongs_to :kpi
 
-  validates :date, :value, presence: true
+  #validates :date, :value, presence: true
 
   scope :get_wkvalue, -> (start) {where date: start if start.present?} 
+
 
   #set method
 

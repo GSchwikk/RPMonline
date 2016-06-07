@@ -16,7 +16,7 @@ gem 'pg', group: :production
 gem 'devise'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
-gem 'best_in_place', github: 'bernat/best_in_place'
+gem 'best_in_place', github: 'sbeam/best_in_place' 
 gem 'jquery-ui-rails'
 gem 'cancancan', '~> 1.10'
 gem 'fog', require: 'fog/aws'

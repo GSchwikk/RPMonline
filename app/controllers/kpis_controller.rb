@@ -67,6 +67,7 @@ class KpisController < ApplicationController
 	def updatevalues
 		#@kpis = Kpi.where(organisation_id: @organisation.id)
 		@kpis = Kpi.where(organisation_id: @organisation.id)
+		
 
 		if params[:event]
 			date = Date.new(*params["event"].values.map(&:to_i))

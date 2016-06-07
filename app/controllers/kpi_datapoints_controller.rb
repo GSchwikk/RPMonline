@@ -6,7 +6,7 @@ class KpiDatapointsController < ApplicationController
 	def updatevalue
 		@kpidatapoint = KpiDatapoint.find( params[:id]) 
 		respond_to do |format|
-		  if @kpidatapoint.update(kpi_params)
+		  if @kpidatapoint.update(kpidatapoint_params)
 		    head :ok
 		    format.json { respond_with_bip(@kpidatapoint) }
 		  else
@@ -16,10 +16,17 @@ class KpiDatapointsController < ApplicationController
 		end
 	end
 
+	def create
+		kpi_datapoint = KpiDatapoint.new kpidatapoint_params 
+		kpi_datapoint.save!
+		render json: kpi_datapoint, root: true
+	end
+
+
 	private
 
-    def kpi_params
-      params.require(:kpi_datapoint).permit(:value, :date, :kpi_id)
+    def kpidatapoint_params
+      params.require(:kpi_datapoint).permit(:date, :value, :kpi_id)
     end
 
 end
