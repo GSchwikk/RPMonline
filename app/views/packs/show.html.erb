@@ -49,7 +49,7 @@
 				  <tbody>
 					<% @highlights.each do |highlight| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :date, :as => :date, id: "date_input" %> : </td>
+						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :date, :as => :date %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, highlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
