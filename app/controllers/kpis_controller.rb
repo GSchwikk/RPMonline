@@ -74,11 +74,18 @@ class KpisController < ApplicationController
 			#period = params[:start_date]
 			#date = Date.new period[year].to_i, period[month].to_i, period[day].to_i
 			@week1 = date.beginning_of_week
-			@week2 = (date.beginning_of_week) -7
+			@week2 = (date.beginning_of_week) - 7
 			@week3 = (date.beginning_of_week) - 14
 			@week4 = (date.beginning_of_week) - 21
 
-		else
+		elsif params[:date]
+
+			@week1 = params[:date].to_date 
+			@week2 = params[:date].to_date-7	
+			@week3 = params[:date].to_date-14
+			@week4 = params[:date].to_date-21			
+
+		else 
 			@week1 = 1.week.ago.beginning_of_week.to_date
 			@week2 = 2.week.ago.beginning_of_week.to_date
 			@week3 = 3.week.ago.beginning_of_week.to_date

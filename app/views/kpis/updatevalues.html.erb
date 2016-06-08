@@ -15,9 +15,14 @@
 </p>
 
 <%= form_tag updatevalues_organisation_kpis_path(@organisation), method: :get do %>
-  	Select Start Date <%= date_select('event','date') %>
+  <%= link_to '<<', updatevalues_organisation_kpis_path(@organisation, date:(@week1-7)), class: "btn btn-link" %>
+  	Select Start Date <%= date_select('event','date',default: @week4) %>
 	<%= submit_tag "Change" %>
+
+  <%= link_to '>>', updatevalues_organisation_kpis_path(@organisation, date:(@week1+7)), class: "btn btn-link" %>
 <% end %>
+
+ 
 
 <table class="table table-hover table-condensed">
   <thead>
