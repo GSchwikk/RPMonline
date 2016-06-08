@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing all Key Performance Indicators</h1>
-
+<br>
 <p>
   Download:
   <%= link_to "CSV", "#" %> |
@@ -15,13 +15,14 @@
 </p>
 
 <%= form_tag updatevalues_organisation_kpis_path(@organisation), method: :get do %>
-  <%= link_to '<<', updatevalues_organisation_kpis_path(@organisation, date:(@week1-7)), class: "btn btn-link" %>
-  	Select Start Date <%= date_select('event','date',default: @week4) %>
+  <%= link_to '<<Previous Week', updatevalues_organisation_kpis_path(@organisation, date:(@week1-7)), class: "btn btn-link" %>
+  	<%= date_field('event','date',value: @week4) %>
 	<%= submit_tag "Change" %>
 
-  <%= link_to '>>', updatevalues_organisation_kpis_path(@organisation, date:(@week1+7)), class: "btn btn-link" %>
+  <%= link_to 'Next Week>>', updatevalues_organisation_kpis_path(@organisation, date:(@week1+7)), class: "btn btn-link" %>
 <% end %>
-
+<br>
+<p id:"kpidate">Date selected will automatically go to beginning of the week<p>
  
 
 <table class="table table-hover table-condensed">

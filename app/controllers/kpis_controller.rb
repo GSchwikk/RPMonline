@@ -70,7 +70,8 @@ class KpisController < ApplicationController
 		
 
 		if params[:event]
-			date = Date.new(*params["event"].values.map(&:to_i))
+			event = params[:event]
+			date = event[:date].to_date
 			#period = params[:start_date]
 			#date = Date.new period[year].to_i, period[month].to_i, period[day].to_i
 			@week1 = date.beginning_of_week
