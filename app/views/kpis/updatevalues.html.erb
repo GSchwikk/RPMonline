@@ -48,21 +48,39 @@
         <td width ="20%"><%= kpi.units %></td>    
 
         <% if kpi.kpi_datapoints.get_wkvalue(@week1).first %>
-          <td> <%= kpi.kpi_datapoints.get_wkvalue(@week1).first.value %></td>
+          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week1).first %>
+              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week1) %>
+          </td>
         <% else %>
-          <td> </td>
+          <td> <% kpi_datapoint = KpiDatapoint.new %>
+            <% kpi_datapoint.date = @week1  %>
+            <% kpi_datapoint.kpi_id = kpi.id  %>
+            <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{kpi_datapoint}_result"  %>
+          </td>
         <% end %>
 
         <% if kpi.kpi_datapoints.get_wkvalue(@week2).first %>
-          <td> <%= kpi.kpi_datapoints.get_wkvalue(@week2).first.value %></td>
+          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week2).first %>
+              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week2) %>
+          </td>
         <% else %>
-          <td> </td>
+          <td> <% kpi_datapoint = KpiDatapoint.new %>
+            <% kpi_datapoint.date = @week2  %>
+            <% kpi_datapoint.kpi_id = kpi.id  %>
+            <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{kpi_datapoint}_result"  %>
+          </td>
         <% end %>
 
         <% if kpi.kpi_datapoints.get_wkvalue(@week3).first %>
-          <td> <%= kpi.kpi_datapoints.get_wkvalue(@week3).first.value %></td>
+          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week3).first %>
+              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week3) %>
+          </td>
         <% else %>
-          <td> </td>
+          <td> <% kpi_datapoint = KpiDatapoint.new %>
+            <% kpi_datapoint.date = @week3  %>
+            <% kpi_datapoint.kpi_id = kpi.id  %>
+            <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{kpi_datapoint}_result"  %>
+          </td>
         <% end %>
 
         <% if kpi.kpi_datapoints.get_wkvalue(@week4).first %>
@@ -73,7 +91,7 @@
           <td> <% kpi_datapoint = KpiDatapoint.new %>
             <% kpi_datapoint.date = @week4  %>
             <% kpi_datapoint.kpi_id = kpi.id  %>
-            <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{v}_result"  %>
+            <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{kpi_datapoint}_result"  %>
           </td>
         <% end %>
 

@@ -79,10 +79,10 @@ class KpisController < ApplicationController
 			@week4 = (date.beginning_of_week) - 21
 
 		else
-			@week1 = 1.week.ago.beginning_of_week
-			@week2 = 2.week.ago.beginning_of_week
-			@week3 = 3.week.ago.beginning_of_week
-			@week4 = 4.week.ago.beginning_of_week
+			@week1 = 1.week.ago.beginning_of_week.to_date
+			@week2 = 2.week.ago.beginning_of_week.to_date
+			@week3 = 3.week.ago.beginning_of_week.to_date
+			@week4 = 4.week.ago.beginning_of_week.to_date
 	    end
 
 
