@@ -1,0 +1,17 @@
+<table border="1">
+	<tr>
+		<th>KPI ID</th>
+		<th>KPI</th>
+		<th>Date</th>
+		<th>Value</th>
+	</tr>
+
+	<% @kpidatapoints.each do |kpidatapoint| %>
+	<tr>
+		<td><%= kpidatapoint.kpi.id %></td>
+		<td><%= kpidatapoint.kpi.name %></td>
+		<td><%= kpidatapoint.date %></td>
+		<td><%= kpidatapoint.value %></td>
+	</tr>
+	<% end %>
+</table>

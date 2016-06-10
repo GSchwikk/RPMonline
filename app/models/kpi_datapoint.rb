@@ -9,6 +9,15 @@ class KpiDatapoint < ActiveRecord::Base
   scope :get_wkvalue, -> (start) {where date: start if start.present?} 
 
 
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |kpidatapoint|
+        csv << kpidatapoint.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   #set method
 
   # def set_wkvalue(val,start)

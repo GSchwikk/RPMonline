@@ -1,6 +1,17 @@
 class KpiDatapointsController < ApplicationController
 	respond_to :html, :json
 
+	def index
+		@organisation = current_user.organisation
+		@kpis = Kpi.where(organisation_id: @organisation.id)
+		@kpidatapoints = KpiDatapoint.joins(:kpi).where("organisation_id = ?", @organisation.id)
+		respond_to do |format|	
+			format.html
+			format.csv { send_data @kpidatapoints.to_csv}
+			format.xls #{ send_data @kpidatapoints.to_csv(col_sep: "\t")}
+		end
+	end
+
 
 
 	def updatevalue
