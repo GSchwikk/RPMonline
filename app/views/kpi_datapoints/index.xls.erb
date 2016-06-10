@@ -2,16 +2,23 @@
 	<tr>
 		<th>KPI ID</th>
 		<th>KPI</th>
-		<th>Date</th>
-		<th>Value</th>
+
+		<% @dates.each do |date| %>
+			<th> <%= date %> </th>
+		<% end %>
 	</tr>
 
-	<% @kpidatapoints.each do |kpidatapoint| %>
+	<% @kpis.each do |kpi| %>
 	<tr>
-		<td><%= kpidatapoint.kpi.id %></td>
-		<td><%= kpidatapoint.kpi.name %></td>
-		<td><%= kpidatapoint.date %></td>
-		<td><%= kpidatapoint.value %></td>
+		<td><%= kpi.id %></td>
+		<td><%= kpi.name %></td>
+		<% @dates.each do |date| %>
+			<% if kpi.kpi_datapoints.get_wkvalue(date).first %>
+				<td> <%= kpi.kpi_datapoints.get_wkvalue(date).first.value %> </td>
+			<% else %>
+				<td> </td>
+			<% end %>
+		<% end %>
 	</tr>
 	<% end %>
 </table>

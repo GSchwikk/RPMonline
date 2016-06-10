@@ -5,6 +5,7 @@ class KpiDatapointsController < ApplicationController
 		@organisation = current_user.organisation
 		@kpis = Kpi.where(organisation_id: @organisation.id)
 		@kpidatapoints = KpiDatapoint.joins(:kpi).where("organisation_id = ?", @organisation.id)
+		@dates = @kpidatapoints.order('date desc').uniq.pluck(:date)
 		respond_to do |format|	
 			format.html
 			format.csv { send_data @kpidatapoints.to_csv}
