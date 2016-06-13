@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :data_imports,:only => [:create, :new]
+
   resources :divisions do
     resources :meetings, except: [ :index] 
   end

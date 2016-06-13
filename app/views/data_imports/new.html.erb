@@ -1,0 +1,52 @@
+<h1>KPI Data Import</h1>
+
+<p>An Excel file can be used to import KPI data. The first row should be the column names, including the date of the data point. The export data file can also be used as a template. See example below:</p>
+
+<Table class="table" border="1">
+  <thead>
+    <th> KPI ID</th>
+    <th> KPI Name</th>
+    <th> 2016/05/02 </th>
+    <th> 2016/05/09 </th>
+    <th> 2016/05/16 </th>
+    <th> ... </th>
+  </thead>
+  <tr>
+    <td> 23 </td>
+    <td> Revenue </td>
+    <td> 67000 </td>
+    <td> 63000 </td>
+    <td> 69000 </td>
+    <td> ... </td>
+  </tr>
+  <tr>
+    <td> 47 </td>
+    <td> Downtime </td>
+    <td> 12% </td>
+    <td> 8% </td>
+    <td> 10% </td>
+    <td> ... </td>
+  </tr>
+
+</table>
+
+<p>IF NO<strong> ID</strong> IS SUPPLIED IT WILL CREATE A NEW KPI INSTEAD OF UPDATING AN EXISTING ONE</p>
+
+
+<%= form_for @data_import do |f| %>
+  <% if @data_import.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@data_import.errors.count, "error") %> prohibited this import from completing:</h2>
+      <ul>
+      <% @data_import.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.file_field :file %>
+  </div>
+  <div class="buttons"><%= f.submit "Import" %></div>
+<% end %>
