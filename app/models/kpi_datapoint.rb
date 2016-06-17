@@ -5,7 +5,9 @@ class KpiDatapoint < ActiveRecord::Base
 
   #validates :date, :value, presence: true
 
-  validates_presence_of :value
+  validates_presence_of :value, :date
+
+  validates :date, format: { with: /\d{4}[\/-]\d{1,2}[\/-]\d{1,2}/, message: "must be in format yyyy/mm/dd" }
 
   scope :get_wkvalue, -> (start) {where date: start if start.present?} 
 
