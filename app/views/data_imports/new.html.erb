@@ -2,6 +2,8 @@
 
 <p>An Excel file can be used to import KPI data. The first row should be the column names, including the date of the data point. The export data file can also be used as a template. See example below:</p>
 
+<h2> Example Excel table structure for import</h2>
+
 <Table class="table" border="1">
   <thead>
     <th> KPI ID</th>
@@ -30,7 +32,7 @@
 
 </table>
 
-<p>IF NO<strong> ID</strong> IS SUPPLIED IT WILL CREATE A NEW KPI INSTEAD OF UPDATING AN EXISTING ONE</p>
+<p>IF NO<strong> EXISTING KPI ID</strong> IS FOUND, THE ROW WILL BE IGNORED</p>
 
 
 <%= form_for @data_import do |f| %>

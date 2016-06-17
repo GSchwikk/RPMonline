@@ -1,10 +1,11 @@
 class KpiDatapoint < ActiveRecord::Base
-  
-
 
   belongs_to :kpi
 
+
   #validates :date, :value, presence: true
+
+  validates_presence_of :value
 
   scope :get_wkvalue, -> (start) {where date: start if start.present?} 
 

@@ -2,9 +2,7 @@
 
 <h1>Listing all Key Performance Indicators</h1>
 <br>
-<p><%= link_to "Download to Excel", kpi_datapoints_path(format: "xls") %> </p>
-  
-<p><%= link_to "Import Data", new_data_import_path %> </p>
+<p><%= link_to "Download to Excel", kpi_datapoints_path(format: "xls") %> | <%= link_to "Import from Excel", new_data_import_path %> </p>
 
 
 <%= form_tag updatevalues_organisation_kpis_path(@organisation), method: :get do %>
