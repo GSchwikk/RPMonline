@@ -217,8 +217,8 @@
 							<td> <%= kpi.name %></td>
 							<td> <%= kpi.units %></td>
 							<td> <%= kpi.vector %></td>
-							<td> <%= kpi.kpi_datapoints.get_wkvalue %> </td>
-							<td> <%= kpi.kpi_datapoints.get_1wkvalue %> </td>
+							<td> <%= kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
+							<td> <%= kpi.kpi_datapoints.get_1wkvalue.average(:value) %> </td>
 							<td> <%= kpi.kpi_datapoints.get_4wkvalues.average(:value) %> </td>				
 						</tr>
 					<% end %>
