@@ -12,6 +12,9 @@ class KpiDatapoint < ActiveRecord::Base
   validates_numericality_of :value
 
   scope :get_wkvalue, -> (start) {where date: start if start.present?} 
+  scope :get_4wkvalues, -> {where("date > ?", 4.week.ago) }
+  scope :get_wkvalue, -> {where("date > ?", 0.week.ago) }
+  scope :get_1wkvalues, -> {where("date > ?", 1.week.ago) }
 
 
   def self.to_csv(options = {})
@@ -23,12 +26,6 @@ class KpiDatapoint < ActiveRecord::Base
     end
   end
 
-  #set method
-
-  # def set_wkvalue(val,start)
-  #   point = KpiDatapoint.where(date: start)
-  #   point.value = val
-  # end
 
 
   # def self.wkvalue(startdate)

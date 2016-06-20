@@ -206,7 +206,9 @@
 				      <th>KPI Name</th>
 				      <th>Units</th>
 				      <th>Vector</th>
-				      <th>Frequency</th>
+				      <th>This Week</th>
+				      <th>Previous Week</th>
+  				      <th>4 week average</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -215,7 +217,9 @@
 							<td> <%= kpi.name %></td>
 							<td> <%= kpi.units %></td>
 							<td> <%= kpi.vector %></td>
-							<td> <%= kpi.frequency %></td>						
+							<td> <%= kpi.kpi_datapoints.get_wkvalue %> </td>
+							<td> <%= kpi.kpi_datapoints.get_1wkvalue %> </td>
+							<td> <%= kpi.kpi_datapoints.get_4wkvalues.average(:value) %> </td>				
 						</tr>
 					<% end %>
 				  </tbody>
