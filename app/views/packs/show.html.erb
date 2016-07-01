@@ -206,6 +206,7 @@
 				      <th>KPI Name</th>
 				      <th>Units</th>
 				      <th>Vector</th>
+				      <th>Target</th>
 				      <th>This Week</th>
 				      <th>Previous Week</th>
   				      <th>4 week average</th>
@@ -217,9 +218,17 @@
 							<td> <%= kpi.name %></td>
 							<td> <%= kpi.units %></td>
 							<td> <%= kpi.vector %></td>
-							<td> <%= kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
-							<td> <%= kpi.kpi_datapoints.get_1wkvalue.average(:value) %> </td>
-							<td> <%= kpi.kpi_datapoints.get_4wkvalues.average(:value) %> </td>				
+					        <% if kpi.units == 'Number' %>
+          						<td> <%= kpi.target %></td>
+								<td> <%= kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
+								<td> <%= kpi.kpi_datapoints.get_1wkvalue.average(:value) %> </td>
+								<td> <%= kpi.kpi_datapoints.get_4wkvalues.average(:value) %> </td>
+        					<% else %>
+          						<td><%= number_to_percentage(kpi.target, precision: 2) %></td>
+								<td> <%= number_to_percentage(kpi.kpi_datapoints.get_thiswkvalue.average(:value), precision: 2) %> </td>
+								<td> <%= number_to_percentage(kpi.kpi_datapoints.get_1wkvalue.average(:value), precision: 2) %> </td>
+								<td> <%= number_to_percentage(kpi.kpi_datapoints.get_4wkvalues.average(:value), precision: 2) %> </td>
+        					<% end %>				
 						</tr>
 					<% end %>
 				  </tbody>

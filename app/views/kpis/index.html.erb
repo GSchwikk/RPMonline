@@ -32,7 +32,11 @@
         <td><%= kpi.name %></td>
         <td><%= kpi.vector %></td>
         <td><%= kpi.units %></td>
-        <td><%= kpi.target %></td>
+        <% if kpi.units == 'Number' %>
+          <td><%= kpi.target %></td>
+        <% else %>
+          <td><%= number_to_percentage(kpi.target, precision: 2) %>
+        <% end %>
         <% if params[:pack] %>
           <% if @pack.kpis.include?(kpi) %>
             <td><%= link_to 'Remove from Pack', updatepack_organisation_kpi_path(@organisation, kpi, pack: @pack.id, change: "1"), method: :put %> </td>
