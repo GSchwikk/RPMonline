@@ -4,5 +4,6 @@ class Kpi < ActiveRecord::Base
   has_many :kpi_datapoints, dependent: :destroy
   belongs_to :organisation
 
-  validates :name, :vector, :units, :frequency, presence: true
+  validates :name, :vector, :units, :target, presence: true
+  validates_numericality_of :target
 end

@@ -101,7 +101,7 @@ class KpisController < ApplicationController
 		@kpi = Kpi.find( params[:id] )
 		respond_to do |format|
 		  if @kpi.update(kpi_params)
-		    format.html { redirect_to @kpi, notice: 'KPI was successfully updated.' }
+		    format.html { redirect_to organisation_kpis_path, notice: 'KPI was successfully updated.' }
 		    format.json { respond_with_bip(@kpi) }
 		  else
 		    format.html { render :edit }
@@ -123,7 +123,7 @@ class KpisController < ApplicationController
 	private
 
     def kpi_params
-      params.require(:kpi).permit(:name, :vector, :units, :frequency,:organisation_id, :pack_ids => [])
+      params.require(:kpi).permit(:name, :vector, :units, :target,:organisation_id, :pack_ids => [])
     end
 
     def set_organisation

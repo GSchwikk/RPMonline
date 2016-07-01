@@ -20,7 +20,7 @@
       <th>Name</th>
       <th>Vector</th>
       <th>Units</th>
-      <th>Frequency</th>
+      <th>Target</th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -32,7 +32,7 @@
         <td><%= kpi.name %></td>
         <td><%= kpi.vector %></td>
         <td><%= kpi.units %></td>
-        <td><%= kpi.frequency %></td>
+        <td><%= kpi.target %></td>
         <% if params[:pack] %>
           <% if @pack.kpis.include?(kpi) %>
             <td><%= link_to 'Remove from Pack', updatepack_organisation_kpi_path(@organisation, kpi, pack: @pack.id, change: "1"), method: :put %> </td>
