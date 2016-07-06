@@ -3,12 +3,12 @@ class KpiDatapoint < ActiveRecord::Base
   belongs_to :kpi
 
 
-  #validates :date, :value, presence: true
+  validates :date, :value, presence: true
 
   validates_presence_of :value, :date
 
   validates :date, format: { with: /\d{4}[\/-]\d{1,2}[\/-]\d{1,2}/, message: "must be in format yyyy/mm/dd" }
-  validates_numericality_of :date, message: "must be in date format (not text)"
+  #validates_numericality_of :date, message: "must be in date format (not text)"
   validates_numericality_of :value
 
   scope :get_wkvalue, -> (start) {where date: start if start.present?} 

@@ -16,9 +16,9 @@ class KpiDatapointsController < ApplicationController
 
 
 	def updatevalue
-		@kpidatapoint = KpiDatapoint.find( params[:id]) 
+		@kpidatapoint = KpiDatapoint.find(params[:id]) 
 		respond_to do |format|
-		  if @kpidatapoint.update(kpidatapoint_params)
+		  if @kpidatapoint.update_attribute(:value, kpidatapoint_params[:value])
 		    head :ok
 		    format.json { respond_with_bip(@kpidatapoint) }
 		  else
@@ -29,7 +29,12 @@ class KpiDatapointsController < ApplicationController
 	end
 
 	def create
+		@date = kpidatapoint_params[:date]
+		@date = @date.to_time
+		@date = @date.strftime('%Y/%m/%d')
+		puts @date
 		kpi_datapoint = KpiDatapoint.new kpidatapoint_params 
+		kpi_datapoint.date  = @date
 		kpi_datapoint.save!
 		render json: kpi_datapoint, root: true
 	end
