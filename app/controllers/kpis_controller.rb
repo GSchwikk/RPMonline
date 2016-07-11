@@ -87,10 +87,10 @@ class KpisController < ApplicationController
 			@week4 = params[:date].to_date-21			
 
 		else 
-			@week1 = 1.week.ago.beginning_of_week.to_date
-			@week2 = 2.week.ago.beginning_of_week.to_date
-			@week3 = 3.week.ago.beginning_of_week.to_date
-			@week4 = 4.week.ago.beginning_of_week.to_date
+			@week1 = 0.week.ago.beginning_of_week.to_date
+			@week2 = 1.week.ago.beginning_of_week.to_date
+			@week3 = 2.week.ago.beginning_of_week.to_date
+			@week4 = 3.week.ago.beginning_of_week.to_date
 	    end
 	end
 

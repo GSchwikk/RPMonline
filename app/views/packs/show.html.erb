@@ -219,7 +219,7 @@
 							<td> <%= kpi.units %></td>
 							<td> <%= kpi.vector %></td>
 					        <% if kpi.units == 'Number' %>
-          						<td> <%= kpi.target %></td>
+          						<td> <%= kpi.target.round(2) %></td>
 								<td> <%= kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
 								<td> <%= kpi.kpi_datapoints.get_1wkvalue.average(:value) %> </td>
 								<td> <%= kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>

@@ -13,8 +13,8 @@ class KpiDatapoint < ActiveRecord::Base
 
   scope :get_wkvalue, -> (start) {where date: start if start.present?} 
   scope :get_4wkvalues, -> {where("date > ?", 4.week.ago) }
-  scope :get_thiswkvalue, -> {where("date > ?", 0.week.ago) }
-  scope :get_1wkvalue, -> {where("date > ?", 1.week.ago) }
+  scope :get_thiswkvalue, -> {where("date = ?", 0.week.ago.beginning_of_week.to_date) }
+  scope :get_1wkvalue, -> {where("date = ?", 1.week.ago.beginning_of_week.to_date) }
 
 
   def self.to_csv(options = {})

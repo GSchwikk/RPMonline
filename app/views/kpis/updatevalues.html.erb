@@ -30,10 +30,10 @@
   <thead>
       <th width ="20%">Name</th>
       <th width ="20%">Units</th>
-      <th><%= @week1.strftime('%d/%m/%Y') %></th>
-      <th><%= @week2.strftime('%d/%m/%Y') %></th>
-      <th><%= @week3.strftime('%d/%m/%Y') %></th>
       <th><%= @week4.strftime('%d/%m/%Y') %></th>
+      <th><%= @week3.strftime('%d/%m/%Y') %></th>
+      <th><%= @week2.strftime('%d/%m/%Y') %></th>
+      <th><%= @week1.strftime('%d/%m/%Y') %></th>
 
   </thead>
 
@@ -43,25 +43,13 @@
         <td width ="20%"><%= kpi.name %></td>
         <td width ="20%"><%= kpi.units %></td>    
 
-        <% if kpi.kpi_datapoints.get_wkvalue(@week1).first %>
-          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week1).first %>
-              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week1) %>
+        <% if kpi.kpi_datapoints.get_wkvalue(@week4).first %>
+          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week4).first %>
+              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week4) %>
           </td>
         <% else %>
           <td> <% kpi_datapoint = KpiDatapoint.new %>
-            <% kpi_datapoint.date = @week1  %>
-            <% kpi_datapoint.kpi_id = kpi.id  %>
-            <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{kpi_datapoint}_result"  %>
-          </td>
-        <% end %>
-
-        <% if kpi.kpi_datapoints.get_wkvalue(@week2).first %>
-          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week2).first %>
-              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week2) %>
-          </td>
-        <% else %>
-          <td> <% kpi_datapoint = KpiDatapoint.new %>
-            <% kpi_datapoint.date = @week2.to_date  %>
+            <% kpi_datapoint.date = @week4  %>
             <% kpi_datapoint.kpi_id = kpi.id  %>
             <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{kpi_datapoint}_result"  %>
           </td>
@@ -79,13 +67,25 @@
           </td>
         <% end %>
 
-        <% if kpi.kpi_datapoints.get_wkvalue(@week4).first %>
-          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week4).first %>
-              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week4) %>
+        <% if kpi.kpi_datapoints.get_wkvalue(@week2).first %>
+          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week2).first %>
+              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week2) %>
           </td>
         <% else %>
           <td> <% kpi_datapoint = KpiDatapoint.new %>
-            <% kpi_datapoint.date = @week4.to_date  %>
+            <% kpi_datapoint.date = @week2.to_date  %>
+            <% kpi_datapoint.kpi_id = kpi.id  %>
+            <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{kpi_datapoint}_result"  %>
+          </td>
+        <% end %>
+
+        <% if kpi.kpi_datapoints.get_wkvalue(@week1).first %>
+          <td> <% v = kpi.kpi_datapoints.get_wkvalue(@week1).first %>
+              <%= best_in_place v, :value, :as => :input, url: updatevalue_kpi_datapoint_path(id: v.id, date: @week1) %>
+          </td>
+        <% else %>
+          <td> <% kpi_datapoint = KpiDatapoint.new %>
+            <% kpi_datapoint.date = @week1.to_date  %>
             <% kpi_datapoint.kpi_id = kpi.id  %>
             <%= best_in_place kpi_datapoint, :value, :as => :input, id: "best_in_place_kpi_datapoint_result_#{kpi_datapoint}_result"  %>
           </td>
