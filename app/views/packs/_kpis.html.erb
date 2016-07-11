@@ -11,40 +11,45 @@
 		<% end %>
 
 	</div>
-	
+
 	<div class="row rpmpack">
-		<div class="col-md-12">
+		<div class="table-responsive">
 			<% if @pack.kpis.blank? %>
 				<h4> No KPIs added to this pack yet </h4>
 			<% else %>
 				<table class="table table-hover table-condensed">
 				  <thead>
 				    <tr>
-				      <th>KPI Name</th>
-				      <th>Units</th>
-				      <th>Vector</th>
+				      <th width= "10%">KPI Name</th>
+				      <th width= "10%" class="hidden-xs">Units</th>
+				      <th width= "10%" class="hidden-xs">Vector</th>
 				      <th>Target</th>
 				      <th>This Week</th>
-				      <th>Previous Week</th>
+				      <th>Variance</th>
   				      <th>4 week average</th>
+  				      <th>Variance</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 					<% @pack.kpis.each do |kpi| %>
 						<tr>
-							<td> <%= kpi.name %></td>
-							<td> <%= kpi.units %></td>
-							<td> <%= kpi.vector %></td>
+							<td width= "10%"> <%= kpi.name %></td>
+							<td width= "10%" class="hidden-xs"> <%= kpi.units %></td>
+							<td width= "10%" class="hidden-xs"> <%= kpi.vector %></td>
 					        <% if kpi.units == 'Number' %>
           						<td> <%= kpi.target.round(2) %></td>
-								<td> <%= kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
-								<td> <%= kpi.kpi_datapoints.get_1wkvalue.average(:value) %> </td>
-								<td> <%= kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
+								<td> <%= t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
+								<td> <%= t - kpi.target %> </td>
+								<td> <%= ave = kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
+								<td> <%= ave - kpi.target %> </td>
         					<% else %>
           						<td><%= number_to_percentage(kpi.target, precision: 2) %></td>
-								<td> <%= number_to_percentage(kpi.kpi_datapoints.get_thiswkvalue.average(:value), precision: 2) %> </td>
-								<td> <%= number_to_percentage(kpi.kpi_datapoints.get_1wkvalue.average(:value), precision: 2) %> </td>
-								<td> <%= number_to_percentage(kpi.kpi_datapoints.get_4wkvalues.average(:value), precision: 2) %> </td>
+									<% t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> 
+								<td> <%= number_to_percentage(t, precision: 2) %> </td>
+								<td> <%= number_to_percentage(t - kpi.target, precision: 2) %> </td>
+									 <% ave = kpi.kpi_datapoints.get_4wkvalues.average(:value) %> 
+								<td> <%= number_to_percentage(ave, precision: 2) %></td>
+								<td> <%= number_to_percentage(ave - kpi.target, precision: 2) %> </td>
         					<% end %>				
 						</tr>
 					<% end %>
