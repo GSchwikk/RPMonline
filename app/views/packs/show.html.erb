@@ -222,7 +222,7 @@
           						<td> <%= kpi.target %></td>
 								<td> <%= kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
 								<td> <%= kpi.kpi_datapoints.get_1wkvalue.average(:value) %> </td>
-								<td> <%= kpi.kpi_datapoints.get_4wkvalues.average(:value) %> </td>
+								<td> <%= kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
         					<% else %>
           						<td><%= number_to_percentage(kpi.target, precision: 2) %></td>
 								<td> <%= number_to_percentage(kpi.kpi_datapoints.get_thiswkvalue.average(:value), precision: 2) %> </td>
