@@ -92,9 +92,6 @@ class KpisController < ApplicationController
 			@week3 = 3.week.ago.beginning_of_week.to_date
 			@week4 = 4.week.ago.beginning_of_week.to_date
 	    end
-
-
-
 	end
 
 	def update
