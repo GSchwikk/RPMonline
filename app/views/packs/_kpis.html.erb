@@ -20,36 +20,55 @@
 				<table class="table table-hover table-condensed">
 				  <thead>
 				    <tr>
-				      <th width= "10%">KPI Name</th>
+				      <th>KPI Name</th>
 				      <th width= "10%" class="hidden-xs">Units</th>
 				      <th width= "10%" class="hidden-xs">Vector</th>
 				      <th>Target</th>
 				      <th>This Week</th>
 				      <th>Variance</th>
-  				      <th>4 week average</th>
-  				      <th>Variance</th>
+  				      <th>Status</th>
+<!--   				      <th>4 week average</th>
+  				      <th>Variance</th> -->
 				    </tr>
 				  </thead>
 				  <tbody>
 					<% @pack.kpis.each do |kpi| %>
 						<tr>
-							<td width= "10%"> <%= kpi.name %></td>
+							<td> <%= kpi.name %></td>
 							<td width= "10%" class="hidden-xs"> <%= kpi.units %></td>
 							<td width= "10%" class="hidden-xs"> <%= kpi.vector %></td>
 					        <% if kpi.units == 'Number' %>
           						<td> <%= kpi.target.round(2) %></td>
 								<td> <%= t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
-								<td> <%= t - kpi.target %> </td>
-								<td> <%= ave = kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
-								<td> <%= ave - kpi.target %> </td>
+								<td> <%= var = t - kpi.target %> </td>
+								<% if kpi.vector == "Maximise" && var >= 0 %>
+								<td class="green"> <span class="glyphicon glyphicon-ok"></span> </td>
+								<% elsif kpi.vector == "Maximise" && var < 0 %>
+								<td class="red"> <span class="glyphicon glyphicon-remove"></span> </td>
+								<% elsif kpi.vector == "Minimise" && var <= 0 %>
+								<td class="green"> <span class="glyphicon glyphicon-ok"></span> </td>
+								<% elsif kpi.vector == "Minimise" && var > 0 %>
+								<td class="red"> <span class="glyphicon glyphicon-remove"></span> </td>
+								<% end %>
+<!-- 								<td> <%= ave = kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
+								<td> <%= ave - kpi.target %> </td> -->
         					<% else %>
           						<td><%= number_to_percentage(kpi.target, precision: 2) %></td>
 									<% t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> 
 								<td> <%= number_to_percentage(t, precision: 2) %> </td>
-								<td> <%= number_to_percentage(t - kpi.target, precision: 2) %> </td>
-									 <% ave = kpi.kpi_datapoints.get_4wkvalues.average(:value) %> 
+								<td> <%= number_to_percentage(var = t - kpi.target, precision: 2) %> </td>
+								<% if kpi.vector == "Maximise" && var >= 0 %>
+								<td class="green"> <span class="glyphicon glyphicon-ok"></span> </td>
+								<% elsif kpi.vector == "Maximise" && var < 0 %>
+								<td class="red"> <span class="glyphicon glyphicon-remove"></span> </td>
+								<% elsif kpi.vector == "Minimise" && var <= 0 %>
+								<td class="green"> <span class="glyphicon glyphicon-ok"></span> </td>
+								<% elsif kpi.vector == "Minimise" && var > 0 %>
+								<td class="red"> <span class="glyphicon glyphicon-remove"></span> </td>
+								<% end %>
+<!-- 									 <% ave = kpi.kpi_datapoints.get_4wkvalues.average(:value) %> 
 								<td> <%= number_to_percentage(ave, precision: 2) %></td>
-								<td> <%= number_to_percentage(ave - kpi.target, precision: 2) %> </td>
+								<td> <%= number_to_percentage(ave - kpi.target, precision: 2) %> </td> -->
         					<% end %>				
 						</tr>
 					<% end %>
