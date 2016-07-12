@@ -23,10 +23,10 @@
 				      <th>KPI Name</th>
 				      <th width= "10%" class="hidden-xs">Units</th>
 				      <th width= "10%" class="hidden-xs">Vector</th>
-				      <th>Target</th>
-				      <th>This Week</th>
-				      <th>Variance</th>
-  				      <th>Status</th>
+				      <th class="center">Target</th>
+				      <th class="center">This Week</th>
+				      <th class="center">Variance</th>
+  				      <th class="center">Status</th>
 <!--   				      <th>4 week average</th>
   				      <th>Variance</th> -->
 				    </tr>
@@ -38,17 +38,17 @@
 							<td width= "10%" class="hidden-xs"> <%= kpi.units %></td>
 							<td width= "10%" class="hidden-xs"> <%= kpi.vector %></td>
 					        <% if kpi.units == 'Number' %>
-          						<td> <%= kpi.target.round(2) %></td>
-								<td> <%= t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
-								<td> <%= var = t - kpi.target %> </td>
+          						<td class="center"> <%= kpi.target.round(2) %></td>
+								<td class="center"> <%= t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
+								<td class="center"> <%= var = t - kpi.target %> </td>
 								<%= status_icon(kpi,var) %>
 <!-- 								<td> <%= ave = kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
 								<td> <%= ave - kpi.target %> </td> -->
         					<% else %>
-          						<td><%= number_to_percentage(kpi.target, precision: 2) %></td>
+          						<td class="center"><%= number_to_percentage(kpi.target, precision: 2) %></td>
 									<% t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> 
-								<td> <%= number_to_percentage(t, precision: 2) %> </td>
-								<td> <%= number_to_percentage(var = t - kpi.target, precision: 2) %> </td>
+								<td class="center"> <%= number_to_percentage(t, precision: 2) %> </td>
+								<td class="center"> <%= number_to_percentage(var = t - kpi.target, precision: 2) %> </td>
 								<%= status_icon(kpi,var) %>
 <!-- 									 <% ave = kpi.kpi_datapoints.get_4wkvalues.average(:value) %> 
 								<td> <%= number_to_percentage(ave, precision: 2) %></td>
