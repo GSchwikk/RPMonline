@@ -1,19 +1,24 @@
 <div class ="jumbotron">
   <div class="container">
-    <h2> RPMOnline lets you set up Review and Progress Meetings</h2>
+    <h2> RAPOnline lets you set up Review and Progress Meetings</h2>
     <h3> Setup your own organisation, meetings, and KPIs </h3>
   </div>
 </div>
 
 
-<h1>Welcome to RPMOnline</h1>
+<h1>Welcome to RAPOnline</h1>
 <br>
-<p>This is a demo application for Review and Progress Meetings (RPM) online, a platform for setting up and running RPMs with your team</p>
+<p>This is a demo application for Review and Progress Meetings (RAP) online, a platform for setting up and running RAPs with your team</p>
 <br>
 
 <% if user_signed_in? %>
     
     <%= link_to current_user, class: "btn btn-default", data: { no_turbolink: true} do %><i class="glyphicon glyphicon-list-alt"></i> See Dashboard
+    <% end %>
+
+    <% if @pack %>
+        <%= link_to pack_path(@pack), class: "btn btn-default", data: { no_turbolink: true} do %><i class="glyphicon glyphicon-list-alt"></i> See My Pack
+        <% end %>
     <% end %>
 
 <% else %>

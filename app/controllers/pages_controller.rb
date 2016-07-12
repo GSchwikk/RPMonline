@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def home
+  	@pack = Pack.where(user_id: current_user.id).first
   end
 
 end
