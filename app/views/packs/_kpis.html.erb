@@ -18,7 +18,7 @@
 				<h4> No KPIs added to this pack yet </h4>
 			<% else %>
 				<table class="table table-hover table-condensed">
-				  <thead>
+				  <thead class="pack-header">
 				    <tr>
 				      <th>KPI Name</th>
 				      <th width= "10%" class="hidden-xs">Units</th>
@@ -41,15 +41,7 @@
           						<td> <%= kpi.target.round(2) %></td>
 								<td> <%= t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
 								<td> <%= var = t - kpi.target %> </td>
-								<% if kpi.vector == "Maximise" && var >= 0 %>
-								<td class="green"> <span class="glyphicon glyphicon-ok"></span> </td>
-								<% elsif kpi.vector == "Maximise" && var < 0 %>
-								<td class="red"> <span class="glyphicon glyphicon-remove"></span> </td>
-								<% elsif kpi.vector == "Minimise" && var <= 0 %>
-								<td class="green"> <span class="glyphicon glyphicon-ok"></span> </td>
-								<% elsif kpi.vector == "Minimise" && var > 0 %>
-								<td class="red"> <span class="glyphicon glyphicon-remove"></span> </td>
-								<% end %>
+								<%= status_icon(kpi,var) %>
 <!-- 								<td> <%= ave = kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
 								<td> <%= ave - kpi.target %> </td> -->
         					<% else %>
@@ -57,15 +49,7 @@
 									<% t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> 
 								<td> <%= number_to_percentage(t, precision: 2) %> </td>
 								<td> <%= number_to_percentage(var = t - kpi.target, precision: 2) %> </td>
-								<% if kpi.vector == "Maximise" && var >= 0 %>
-								<td class="green"> <span class="glyphicon glyphicon-ok"></span> </td>
-								<% elsif kpi.vector == "Maximise" && var < 0 %>
-								<td class="red"> <span class="glyphicon glyphicon-remove"></span> </td>
-								<% elsif kpi.vector == "Minimise" && var <= 0 %>
-								<td class="green"> <span class="glyphicon glyphicon-ok"></span> </td>
-								<% elsif kpi.vector == "Minimise" && var > 0 %>
-								<td class="red"> <span class="glyphicon glyphicon-remove"></span> </td>
-								<% end %>
+								<%= status_icon(kpi,var) %>
 <!-- 									 <% ave = kpi.kpi_datapoints.get_4wkvalues.average(:value) %> 
 								<td> <%= number_to_percentage(ave, precision: 2) %></td>
 								<td> <%= number_to_percentage(ave - kpi.target, precision: 2) %> </td> -->

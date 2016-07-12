@@ -1,31 +1,35 @@
 
-<div class = "container-fluid">
+<div class="container-fluid">
 
-	<%= image_tag current_user.organisation.image.logo.url %>
 
-	<h4>
-	  <strong><%= @pack.title %></strong>
-	  
-	</h4>
 
-	<h4>
-	  <strong><%= best_in_place @pack, :status, :as => :select, :collection => @packstatus_values,:value => @pack.status %> </strong>
-	  
-	</h4>
+	<div class="row bottom pack-bar">
+		<div class="col-md-9 left">
+			<h1>
+			  <strong><%= @pack.title %></strong>		  
+			</h1>
+
+			<h2>
+			  <strong><%= best_in_place @pack, :status, :as => :select, :collection => @packstatus_values,:value => @pack.status %> </strong>		  
+			</h2>
+
+			| <%= link_to 'Edit', edit_pack_path(@pack), class: "btn pack-nav" %> |
+			<% if current_user.role = "org_owner" || current_user.role = "meeting_owner"|| current_user.role = "div_owner"%>
+				<%= link_to 'Back', meeting_path(@pack.meeting_id), class: "btn pack-nav" %>  |
+			<% end %>
+		</div>
+
+		<div class="col-md-3 right hidden-xs">
+			<%= image_tag current_user.organisation.image.logo.url %>
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="col-md-6 left">
-			| <%= link_to 'Edit', edit_pack_path(@pack), class: "btn btn-link" %> |
-			<% if current_user.role = "org_owner" || current_user.role = "meeting_owner"|| current_user.role = "div_owner"%>
-				<%= link_to 'Back', meeting_path(@pack.meeting_id), class: "btn btn-link" %>  |
-			<% end %>
-			<br>
 			<h3> Summary <h3>
 		</div>
-			
 
 		<div class="col-md-6 right">
-			<br>
 			<br>
 	        <%= link_to new_pack_update_path(@pack), class: "btn btn-default", data: { no_turbolink: true} do %>
 	          <i class="glyphicon glyphicon-plus"></i> Add Update
@@ -39,7 +43,7 @@
 			<h3>No updates yet</h3>
 		<% else %>
 				<table class="table table-hover table-condensed">
-				  <thead>
+				  <thead class="pack-header">
 				    <tr>
 				      <th>HIGHLIGHTS</th>
 				      <th colspan="2"></th>
@@ -48,7 +52,7 @@
 				  <tbody>
 					<% @highlights.each do |highlight| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :date, :as => :date %> : </td>
+						<td width = "20%" class="hidden-xs"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :date, :as => :date %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, highlight], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, highlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -62,7 +66,7 @@
 
 		<div class="col-md-6">
 			<table class="table table-hover table-condensed">
-			  <thead>
+			  <thead class="pack-header">
 			    <tr>
 			      <th>ISSUES</th>
 			      <th colspan="2"></th>
@@ -71,7 +75,7 @@
 			  <tbody>
 				<% @issues.each do |issue| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, issue], :date, :as => :date, id: "date_input" %> : </td>
+						<td width = "20%" class="hidden-xs"> <%= best_in_place_if (can? :manage, @pack), [@pack, issue], :date, :as => :date, id: "date_input" %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, issue], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, issue), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -89,7 +93,7 @@
 
 		<div class="col-md-6">
 			<table class="table table-hover table-condensed">
-			  <thead>
+			  <thead class="pack-header">
 			    <tr>
 			      <th>LOWLIGHTS</th>
 			      <th colspan="2"></th>
@@ -98,7 +102,7 @@
 			  <tbody>
 				<% @lowlights.each do |lowlight| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, lowlight], :date, :as => :date, id: "date_input" %> : </td>
+						<td width = "20%" class="hidden-xs"> <%= best_in_place_if (can? :manage, @pack), [@pack, lowlight], :date, :as => :date, id: "date_input" %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, lowlight], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, lowlight), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -111,7 +115,7 @@
 
 		<div class="col-md-6">
 			<table class="table table-hover table-condensed">
-			  <thead>
+			  <thead class="pack-header">
 			    <tr>
 			      <th>PRIORITIES</th>
 			      <th colspan="2"></th>
@@ -120,7 +124,7 @@
 			  <tbody>
 				<% @priorities.each do |priority| %>
 					<tr>
-						<td width = "20%"> <%= best_in_place_if (can? :manage, @pack), [@pack, priority], :date, :as => :date, id: "date_input" %> : </td>
+						<td width = "20%" class="hidden-xs"> <%= best_in_place_if (can? :manage, @pack), [@pack, priority], :date, :as => :date, id: "date_input" %> : </td>
 						<td width = "70%"> <%= best_in_place_if (can? :manage, @pack), [@pack, priority], :text, :as => :input %> </td>
 						<% if (can? :manage, @pack) %>
 							<td width = "10%"> <%=link_to "Delete", pack_update_path(@pack, priority), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
