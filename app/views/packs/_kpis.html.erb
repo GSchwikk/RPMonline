@@ -27,32 +27,35 @@
 				      <th class="center">This Week</th>
 				      <th class="center">Variance</th>
   				      <th class="center">Status</th>
-<!--   				      <th>4 week average</th>
-  				      <th>Variance</th> -->
+   				      <th class="center">4 week average</th>
+  				      <th class="center">Variance</th>
+  				      <th class="center">Status</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 					<% @pack.kpis.each do |kpi| %>
 						<tr>
-							<td> <%= kpi.name %></td>
-							<td width= "10%" class="hidden-xs"> <%= kpi.units %></td>
+							<td width= "20%"> <%= kpi.name %></td>
+							<td width= "5%" class="hidden-xs"> <%= units_convert(kpi.units) %></td>
 							<td width= "10%" class="hidden-xs"> <%= kpi.vector %></td>
 					        <% if kpi.units == 'Number' %>
           						<td class="center"> <%= kpi.target.round(2) %></td>
 								<td class="center"> <%= t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> </td>
 								<td class="center"> <%= var = t - kpi.target %> </td>
 								<%= status_icon(kpi,var) %>
-<!-- 								<td> <%= ave = kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
-								<td> <%= ave - kpi.target %> </td> -->
+ 								<td class="center"> <%= ave = kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %> </td>
+ 								<td class="center"> <%= varweeks = ave - kpi.target %> </td>
+								<%= status_icon(kpi,varweeks) %>
         					<% else %>
           						<td class="center"><%= number_to_percentage(kpi.target, precision: 2) %></td>
 									<% t = kpi.kpi_datapoints.get_thiswkvalue.average(:value) %> 
 								<td class="center"> <%= number_to_percentage(t, precision: 2) %> </td>
 								<td class="center"> <%= number_to_percentage(var = t - kpi.target, precision: 2) %> </td>
 								<%= status_icon(kpi,var) %>
-<!-- 									 <% ave = kpi.kpi_datapoints.get_4wkvalues.average(:value) %> 
-								<td> <%= number_to_percentage(ave, precision: 2) %></td>
-								<td> <%= number_to_percentage(ave - kpi.target, precision: 2) %> </td> -->
+									<% ave = kpi.kpi_datapoints.get_4wkvalues.average(:value).round(2) %>
+								<td class="center"> <%= number_to_percentage(ave, precision: 2) %></td>
+								<td class="center"> <%= number_to_percentage(varweeks = ave - kpi.target, precision: 2) %> </td>
+								<%= status_icon(kpi,varweeks) %>
         					<% end %>				
 						</tr>
 					<% end %>
