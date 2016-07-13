@@ -1,8 +1,5 @@
 
 <div class="container-fluid">
-
-
-
 	<div class="row bottom pack-bar">
 		<div class="col-md-9 left">
 			<h1>
@@ -37,16 +34,15 @@
 		</div>
 	</div>
 
-	<div class="row rpmpack">
+	<div class="row">
 		<div class="col-md-6">
 		<% if @updates.blank? %>
 			<h3>No updates yet</h3>
 		<% else %>
-				<table class="table table-hover table-condensed">
+				<table class="table table-hover table-condensed table-bordered">
 				  <thead class="pack-header">
 				    <tr>
-				      <th>HIGHLIGHTS</th>
-				      <th colspan="2"></th>
+				      <th colspan="3">HIGHLIGHTS</th>				  
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -65,11 +61,10 @@
 
 
 		<div class="col-md-6">
-			<table class="table table-hover table-condensed">
+			<table class="table table-hover table-condensed table-bordered">
 			  <thead class="pack-header">
 			    <tr>
-			      <th>ISSUES</th>
-			      <th colspan="2"></th>
+			      <th colspan="3">ISSUES</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -92,11 +87,10 @@
 		</div>
 
 		<div class="col-md-6">
-			<table class="table table-hover table-condensed">
+			<table class="table table-hover table-condensed table-bordered">
 			  <thead class="pack-header">
 			    <tr>
-			      <th>LOWLIGHTS</th>
-			      <th colspan="2"></th>
+			      <th colspan="3">LOWLIGHTS</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -114,11 +108,10 @@
 		</div>
 
 		<div class="col-md-6">
-			<table class="table table-hover table-condensed">
+			<table class="table table-hover table-condensed table-bordered">
 			  <thead class="pack-header">
 			    <tr>
-			      <th>PRIORITIES</th>
-			      <th colspan="2"></th>
+			      <th colspan="3">PRIORITIES</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -138,7 +131,7 @@
 		<% end %>
 
 	</div>
-	</div>
+	
 
 	<div class = "row">
 		<div class="col-md-12">

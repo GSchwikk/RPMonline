@@ -12,12 +12,12 @@
 
 	</div>
 
-	<div class="row rpmpack">
+	<div class="row">
 		<div class="table-responsive">
 			<% if @pack.kpis.blank? %>
 				<h4> No KPIs added to this pack yet </h4>
 			<% else %>
-				<table class="table table-hover table-condensed">
+				<table class="table table-hover table-condensed table-bordered">
 				  <thead class="pack-header">
 				    <tr>
 				      <th>KPI Name</th>
@@ -27,7 +27,7 @@
 				      <th class="center">This Week</th>
 				      <th class="center">Variance</th>
   				      <th class="center">Status</th>
-   				      <th class="center">4 week average</th>
+   				      <th class="center">4 week ave.</th>
   				      <th class="center">Variance</th>
   				      <th class="center">Status</th>
 				    </tr>
