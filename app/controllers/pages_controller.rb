@@ -7,7 +7,9 @@ class PagesController < ApplicationController
   end
 
   def home
-  	@pack = Pack.where(user_id: current_user.id).first
+  	if user_signed_in?
+  		@pack = Pack.find_by(user_id: current_user.id)
+  	end
   end
 
 end
