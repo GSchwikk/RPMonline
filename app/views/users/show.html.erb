@@ -9,7 +9,7 @@
 
   <h2> <%= link_to @user.organisation.name, organisation_path(@user.organisation) %> </h2>
 
-  <h4> <%= link_to "Manage Organisation KPIs", organisation_kpis_path(@user.organisation) %> </h4>
+  <h4> <%= link_to "Manage Organisation KPIs", organisation_kpis_path(@user.organisation),class: "btn btn-default" %> </h4>
 
 
 <% else %>
